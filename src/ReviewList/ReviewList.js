@@ -5,7 +5,11 @@ import Review from '../Review/Review';
 class ReviewList extends React.Component {
 
     render() {
-    const reviews = this.props.reviews.map((review) => {
+   //console.log(this.props.currentBook);
+
+    let reviews = this.props.reviews.filter(review => review.bookId == this.props.currentBook.identifier);
+    //console.log(reviews);
+    let reviews2 = reviews.map(review => {
         return (
 
         <Review 
@@ -15,15 +19,17 @@ class ReviewList extends React.Component {
             title={review.title}
             contents={review.contents}
             helpCount={review.helpCount}
+            user={review.user}
+            historyProp={this.props.historyProp}
         />
         )
     } )
-    console.log(this.props.reviews);
-    console.log(reviews);
+    //console.log(this.props.reviews);
+    //console.log(reviews);
 
     return (
         <>
-        {reviews}
+        {reviews2}
         </>
     )
     }

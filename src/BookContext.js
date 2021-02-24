@@ -1,14 +1,18 @@
 import React from 'react'
 
 const BookContext = React.createContext({
-  noteSelected: '',
   results: [],
   reviews: [],
+  users: [],
   showHideNewReviewInput: '',
+  currentUser: '',
   updateTerm: () => {},
   searchHandler: () => {},
   addReview: () => {},
-  helpCountIncrease: () => {}
+  helpCountIncrease: () => {},
+  signUp: () => {},
+  updateCurrentUser: () => {},
+  editReview: () => {}
 })
 
 export default BookContext;

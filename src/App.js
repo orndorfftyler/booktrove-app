@@ -14,6 +14,13 @@ class App extends Component {
     this.state = {
       results : [],
       reviews: [],
+      users:[
+        {
+          user: 'admin',
+          pw:'admin'
+        }
+      ],
+      currentUser: '',
       term: 'coding',
       print: "all",
       free: "remove",
@@ -45,13 +52,52 @@ class App extends Component {
       bookId: bookId,
       title: title,
       contents: desc,
-      helpCount: 0
+      helpCount: 0,
+      user: this.state.currentUser
     }
 
     oldReviews.push(newOne);
     this.setState({reviews: oldReviews});
   }
 
+  editReview = (e, reviewId, title, desc) => {
+    e.preventDefault();
+    let temp = this.state.reviews.filter(obj => (obj.reviewId == reviewId) 
+      ? obj.title = title
+      : obj.title = obj.title);
+    
+    temp = temp.filter(obj => (obj.reviewId == reviewId) 
+      ? obj.contents = desc
+      : obj.title = obj.title);
+    
+      this.setState({reviews: temp});
+      console.log(this.state.reviews);
+  }
+
+  editReviewHelper = (obj, title, desc) => {
+    obj.title = title;
+    obj.contents = desc;
+  }
+
+  signUp = (e, user, pw) => {
+    e.preventDefault();
+    //adding username and pw to db
+    let temp = this.state.users;
+
+    let newOne = {
+      user: user,
+      pw: pw,
+    }
+
+    temp.push(newOne);
+    this.setState({users: temp});
+    console.log('added new user');
+  }
+
+  updateCurrentUser = (user) => {
+    this.setState({currentUser: user});
+  }
+  
   helpCountIncrease = (e, reviewId) => {
     e.preventDefault();
     let temp = this.state.reviews.filter(obj => (obj.reviewId == reviewId) 
@@ -130,10 +176,15 @@ class App extends Component {
     const contextValue = {
       results: this.state.results,
       reviews: this.state.reviews,
+      users: this.state.users,
+      currentUser: this.state.currentUser,
       updateTerm: this.updateTerm,
       searchHandler: this.searchHandler,
       addReview: this.addReview,
-      helpCountIncrease: this.helpCountIncrease
+      helpCountIncrease: this.helpCountIncrease,
+      signUp: this.signUp,
+      updateCurrentUser: this.updateCurrentUser,
+      editReview: this.editReview
     };
 
   return (

@@ -85,9 +85,9 @@ class Book extends React.Component {
                         id={current.identifier}
                     />
 
-        <div className={this.state.showHideReviewInput}>
-                    <form onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)/*(e) => this.context.addReview(e, current.identifier, this.state.content)*/}>
-                        <section class="form-section overview-section">
+            <div className={this.state.showHideReviewInput}>
+                    <form onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)}>
+                        <section className="form-section overview-section">
                             <h3>Read this book? What did you think?</h3>
                             <label htmlFor="title">Title</label>
                             <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
@@ -98,10 +98,9 @@ class Book extends React.Component {
                             </textarea>
 
                             <button  type="submit">Submit</button>
-                            <p onClick>Test Button</p>
                         </section>
                     </form>
-        </div>
+            </div>
                     <section>
                         <h3>Review Name</h3>
                         <p>{JSON.stringify(this.context.reviews)}</p>
@@ -114,6 +113,8 @@ class Book extends React.Component {
 
                     <ReviewList 
                         reviews={this.context.reviews}
+                        currentBook={current}
+                        historyProp={this.props.history}
                     />
                     <section>
                         <h3>Review Name</h3>

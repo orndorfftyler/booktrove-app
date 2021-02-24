@@ -18,6 +18,7 @@ class Search extends React.Component {
 
                 <header>
                     <h1>"quote about books" - famous author</h1>
+                    <p>User:{this.context.currentUser}</p>
                 </header>
 
                 <SearchBar />

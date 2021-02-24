@@ -30,17 +30,11 @@
     padding: 45px 15px;
   }
   
-  section {
-    padding: 30px 15px 0;
-  }
   
   section:nth-child(even) {
     background-color: #ddd;
   }
   
-  p, h2 {
-    margin: 23px 0;
-  }
   
   h2 {
     font-weight: 700;
@@ -48,18 +42,10 @@
   }
   
   form {
-    margin: 0 auto;
-    padding: 0 0 40px;
     max-width: 650px;
   }
   
-  label p {
-    margin: 6px 0 23px;
-  }
   
-  p + p {
-    margin-top: 15px;
-  }
   
   form {
     text-align: left;
@@ -73,13 +59,7 @@
     width: 50px;
   }
   
-  .form-section {
-    margin-bottom: 30px;
-  }
   
-  .button-section {
-    padding: 0 0 0 15px;
-  }
   
   .overview-section input,
   .overview-section textarea {
