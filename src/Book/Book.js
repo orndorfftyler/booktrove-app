@@ -28,6 +28,10 @@ class Book extends React.Component {
 
     componentDidMount = () => {
     
+
+        window.scrollTo(0,0);
+        console.log('book mounted');
+
         /* will need this soon:
         fetch('heroku app url')
           .then(res => {
@@ -56,6 +60,7 @@ class Book extends React.Component {
         this.context.addReview(e, current, title, content)
         
     }
+
 
     render() {
         /*
@@ -86,6 +91,7 @@ class Book extends React.Component {
                         description={current.description}
                         details={current.details}
                         id={current.identifier}
+                        linkify={false}
                     />
 
             <div className={this.state.showHideReviewInput}>

@@ -16,7 +16,9 @@ class ResultList extends React.Component {
             description={book.description}
             details={book.details}
             id={book.identifier}
+            linkify={true}
         />
+
         )
     } )
     console.log(this.props.results);
