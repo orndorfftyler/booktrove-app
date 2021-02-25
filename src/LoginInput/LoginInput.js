@@ -137,8 +137,8 @@ class LoginInput extends React.Component {
 
                         <section className="button-section">
                             {buttonSection}
-                            <p>{JSON.stringify(this.context.users)}</p>
-                            <p>{`currentUser: ${this.context.currentUser}`}</p>
+                            {/*<p>{JSON.stringify(this.context.users)}</p>
+                            <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
 
                         </section>
 

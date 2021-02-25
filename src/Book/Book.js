@@ -2,6 +2,7 @@ import React from 'react';
 import Result from '../Result/Result';
 import BookContext from '../BookContext';
 import ReviewList from '../ReviewList/ReviewList';
+import Navbar from '../Navbar/Navbar';
 import './Book.css';
 
 class Book extends React.Component {
@@ -27,8 +28,8 @@ class Book extends React.Component {
 
     componentDidMount = () => {
     
-        /*
-        fetch('https://obscure-peak-49376.herokuapp.com/api/folders')
+        /* will need this soon:
+        fetch('heroku app url')
           .then(res => {
             if (res.ok) {
               return res.json()
@@ -72,9 +73,11 @@ class Book extends React.Component {
         
         return (
             <div className="look">
-                <nav role="navigation">Nav
-                <button type="submit">Log Out</button>
-                </nav>
+
+                <Navbar 
+                    historyProp={this.props.history}
+                />
+
                 <main role="main">
                     <Result 
                         title={current.title}
@@ -88,7 +91,7 @@ class Book extends React.Component {
             <div className={this.state.showHideReviewInput}>
                     <form onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)}>
                         <section className="form-section overview-section">
-                            <h3>Read this book? What did you think?</h3>
+                            <h3>Have you read this book? What did you think?</h3>
                             <label htmlFor="title">Title</label>
                             <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
 
@@ -101,13 +104,13 @@ class Book extends React.Component {
                         </section>
                     </form>
             </div>
-                    <section>
+                    {/*<section>
                         <h3>Review Name</h3>
                         <p>{JSON.stringify(this.context.reviews)}</p>
                         <p>Awesome and worth reading...</p>
                         <p>9 people found this helpful</p>
                         <button type="submit">This review was helpful</button>
-                    </section>
+                    </section>(*/}
                     
                     {/* use this.context.results to generate review list*/}
 
@@ -117,24 +120,9 @@ class Book extends React.Component {
                         historyProp={this.props.history}
                     />
                     <section>
-                        <h3>Review Name</h3>
-                        <p>Kinda meh...</p>
+                        <h3>Placeholder Review</h3>
+                        <p>This is where reviews will go</p>
                         <p>8 people found this helpful</p>
-                        <button type="submit">This review was helpful</button>
-                    </section>
-
-                    <section>
-                        <h3>Review Name</h3>
-                        <p>Review content</p>
-                        <p>7 people found this helpful</p>
-                        <button type="submit">This review was helpful</button>
-                    </section>
-
-                    <section>
-                        <h3>Review Name</h3>
-                        <p>Review content</p>
-                        <p>6 people found this helpful</p>
-                        <button type="submit">This review was helpful</button>
                     </section>
                     
                 </main>

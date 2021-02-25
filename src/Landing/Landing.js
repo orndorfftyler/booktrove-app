@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Landing.css';
 
 
@@ -7,12 +9,12 @@ class Landing extends React.Component {
     render() {
         return (
             <div className="look">
-                <nav>Nav</nav>
+                <nav></nav>
                 <main>
                     <header>
                         <h1>BookTrove</h1>
                         <h2>All your favorite books in one place</h2>
-                        <button type="submit">Let's Go!</button>
+                        <Link to='/signup'><button type="button">Let's Go!</button></Link>
                     </header>
             
                     <section>
@@ -31,7 +33,7 @@ class Landing extends React.Component {
                     </section>
             
                     <section >
-                    <button type="submit">Let's Go!</button>
+                    <Link to='/signup'><button type="button">Let's Go!</button></Link>
                     </section>
             
                 </main>

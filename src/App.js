@@ -81,9 +81,9 @@ class App extends Component {
 
   signUp = (e, user, pw) => {
     e.preventDefault();
-    //adding username and pw to db
+    
     let temp = this.state.users;
-
+    // storing pw in plaintext just for static client testing
     let newOne = {
       user: user,
       pw: pw,

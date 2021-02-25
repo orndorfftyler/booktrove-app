@@ -16,20 +16,6 @@ class Review extends React.Component {
         }
     }
 
-
-    /*
-    //tried this to fix refresh not working (didn't fix it)
-    goToBook = (bookId) => {
-        this.props.history.push({
-        pathname: `/book/${bookId}`,
-        state: { bookId: `${bookId}` }
-    });
-    }
-    //add to an element:
-    onClick={() => this.goToBook(this.props.id)}
-
-    */
-
     editOn(e) {
         e.preventDefault();
         this.setState({edit:true});
@@ -93,10 +79,10 @@ class Review extends React.Component {
                     <section className="form-section overview-section">
                         <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
-                        <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
+                        <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.props.title} required />
 
                         <label htmlFor="content">Review:</label>
-                        <textarea type="text" name="content" placeholder="Write your review here" required onChange={e => this.updateContent(e.target.value)}>
+                        <textarea type="text" name="content" placeholder="Write your review here" defaultValue={this.props.contents} required onChange={e => this.updateContent(e.target.value)}>
                         
                         </textarea>
 
@@ -110,9 +96,9 @@ class Review extends React.Component {
 
         return (
             <>
-            <p>{this.state.edit.toString()}</p>
+            {/*<p>{this.state.edit.toString()}</p>
             <p>User:{this.context.currentUser}</p>
-            <p>Review author user:{this.props.user}</p>
+            <p>Review author user:{this.props.user}</p>*/}
             {resultContents}
             </>
         )

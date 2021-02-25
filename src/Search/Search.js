@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from '../Searchbar/Searchbar';
 import ResultList from '../ResultList/ResultList';
 import BookContext from '../BookContext';
+import Navbar from '../Navbar/Navbar';
 import './Search.css';
 
 
@@ -12,13 +13,13 @@ class Search extends React.Component {
         return (
             <div className="look">
 
-                <nav role="navigation">Nav
-                <button type="submit">Log Out</button>
-                </nav>
+                <Navbar 
+                    historyProp={this.props.history}
+                />
 
                 <header>
                     <h1>"quote about books" - famous author</h1>
-                    <p>User:{this.context.currentUser}</p>
+                    {/*<p>User:{this.context.currentUser}</p>*/}
                 </header>
 
                 <SearchBar />
