@@ -11,8 +11,8 @@ class Review extends React.Component {
         super(props);
         this.state = {
             edit: false,
-            title: '',
-            content: ''
+            title: this.props.title,
+            contents: this.props.contents
         }
     }
 
@@ -25,16 +25,46 @@ class Review extends React.Component {
     editOff() {
         this.setState({edit:false});
     }
-
-    editReviewHideInput(e, reviewId, title, content) {
+/*
+    patchHelper() {
+        return {
+            reviewId: this.props.reviewId,
+            bookId: this.props.bookId,
+            title: this.state.title,
+            contents: this.state.contents,
+            helpCount: this.props.helpCount
+          }
+    }
+*/
+    editReviewHideInput(e/*, reviewId, title, content*/) {
         e.preventDefault();
         this.setState({edit:false});
 
-        this.context.editReview(e, reviewId, title, content);
+        this.context.patchReview(e, 
+            {
+                reviewId: this.props.reviewId,
+                bookId: this.props.bookId,
+                title: this.state.title,
+                contents: this.state.contents,
+                helpCount: this.props.helpCount
+            }
+        );
+    }
+
+    helpCountIncrease(e) {
+        this.context.patchReview(e, 
+            {
+                reviewId: this.props.reviewId,
+                bookId: this.props.bookId,
+                title: this.state.title,
+                contents: this.state.contents,
+                helpCount: this.props.helpCount + 1
+            }
+        );
     }
 
     updateContent(content) {
-        this.setState({content: content});
+        this.setState({contents: content});
     }
 
     updateTitle(title) {
@@ -50,7 +80,8 @@ class Review extends React.Component {
                     <div>
                         <p>{this.props.contents}</p>
                         <p>{this.props.helpCount} people found this helpful</p>
-                        <button type="submit" onClick={(e) => this.context.helpCountIncrease(e, this.props.reviewId)}>This review was helpful </button>
+                        <p>this.props.user: {this.props.user}</p>
+                        <button type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
                     </div>
                 </div>
             </div>
@@ -66,6 +97,7 @@ class Review extends React.Component {
                             <p>{this.props.contents}</p>
                             <p>{this.props.helpCount} people found this helpful</p>
                             <button type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
+                            <button type="submit" onClick={(e) => this.context.deleteReview(e, this.props.reviewId, this.props.bookId)}>Delete</button>
                         </div>
                     </div>
                 </div>
@@ -75,14 +107,14 @@ class Review extends React.Component {
 
         if (this.state.edit == true) {
             resultContents = (
-                <form onSubmit={(e) => this.editReviewHideInput(e, this.props.reviewId, this.state.title, this.state.content)}>
+                <form onSubmit={(e) => this.editReviewHideInput(e/*, this.props.reviewId, this.state.title, this.state.content*/)}>
                     <section className="form-section overview-section">
                         <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
-                        <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.props.title} required />
+                        <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
 
                         <label htmlFor="content">Review:</label>
-                        <textarea type="text" name="content" placeholder="Write your review here" defaultValue={this.props.contents} required onChange={e => this.updateContent(e.target.value)}>
+                        <textarea onChange={e => this.updateContent(e.target.value)} type="text" name="content" placeholder="Write your review here" defaultValue={this.state.contents} required >
                         
                         </textarea>
 

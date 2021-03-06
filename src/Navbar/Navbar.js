@@ -4,13 +4,13 @@ import BookContext from '../BookContext';
 
 export default class Nav extends React.Component {
     static contextType = BookContext;
-
+/*
     logout(e) {
         e.preventDefault();
         this.context.updateCurrentUser('');
         this.props.historyProp.push('/');
     }
-
+*/
     render() {
 
         let displayUser = this.context.currentUser 
@@ -19,7 +19,7 @@ export default class Nav extends React.Component {
         return (
             <nav className='Nav'>
                 <p>Current User: {displayUser}</p>
-                <button type="button" onClick={(e) => this.logout(e)}>Log Out</button>
+                {/*<button type="button" onClick={(e) => this.logout(e)}>Log Out</button>*/}
             </nav>
         );
     }

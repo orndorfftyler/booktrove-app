@@ -9,10 +9,14 @@ const BookContext = React.createContext({
   updateTerm: () => {},
   searchHandler: () => {},
   addReview: () => {},
-  helpCountIncrease: () => {},
   signUp: () => {},
   updateCurrentUser: () => {},
-  editReview: () => {}
+  //editReview: () => {},
+  getReviews:() => {},
+  patchReview: () => {},
+  deleteReview: () => {},
+
+
 })
 
 export default BookContext;

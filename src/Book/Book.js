@@ -27,40 +27,20 @@ class Book extends React.Component {
     }
 
     componentDidMount = () => {
-    
 
         window.scrollTo(0,0);
-        console.log('book mounted');
 
-        /* will need this soon:
-        fetch('heroku app url')
-          .then(res => {
-            if (res.ok) {
-              return res.json()
-            }
-            throw new Error(res.status)
-          })
-          .then(resJson =>
-            
-            this.setState({
-              folders: resJson
-            })
-            
-            )
-          .catch(error => console.log({ error }))
-          */
-         
-
+        this.context.getReviews(this.props.match.params.bookId);
+        console.log(` this.context.reviews: ${this.context.reviews}`);
     }
 
-    showHideReview(e, current, title, content) {
+    showHideReview(e, bookId, title, content) {
         e.preventDefault();
         //console.log('testFunc ran');
         this.setState({showHideReviewInput: 'hidden'});
-        this.context.addReview(e, current, title, content)
+        this.context.addReview(e, bookId, title, content);
         
     }
-
 
     render() {
         /*
@@ -110,15 +90,13 @@ class Book extends React.Component {
                         </section>
                     </form>
             </div>
-                    {/*<section>
+                    {<section>
                         <h3>Review Name</h3>
                         <p>{JSON.stringify(this.context.reviews)}</p>
-                        <p>Awesome and worth reading...</p>
-                        <p>9 people found this helpful</p>
-                        <button type="submit">This review was helpful</button>
-                    </section>(*/}
+                        <p>current user: {this.context.currentUser}</p>
+                    </section>}
                     
-                    {/* use this.context.results to generate review list*/}
+                    {/* use this.context.reviews to generate review list*/}
 
                     <ReviewList 
                         reviews={this.context.reviews}

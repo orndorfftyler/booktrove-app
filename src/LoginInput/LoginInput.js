@@ -4,6 +4,10 @@ import BookContext from '../BookContext';
 //import { withRouter } from 'react-router-dom';
 //import { useHistory } from "react-router-dom";
 
+import TokenService from '../services/token-service'
+import AuthApiService from '../services/auth-api-service'
+
+
 //import './Signup.css';
 
 class LoginInput extends React.Component {
@@ -14,7 +18,9 @@ class LoginInput extends React.Component {
             signOrLogin:'sign',
             username: '',
             pw1: '',
-            pw2: ''
+            pw2: '',
+            error: null,
+            signupSuccess: false
         }
     }
     static contextType = BookContext;
@@ -36,14 +42,6 @@ class LoginInput extends React.Component {
         this.setState({pw2:val});
     }
 
-    validateUsername() {
-        const users = this.context.users;
-        if (users.some((obj) => obj.user == this.state.username)) {
-            return 'Choose a unique Username';
-        } 
-
-    }
-
     validatePw() {
         if (this.state.pw1 != this.state.pw2) {
             return 'passwords do not match';
@@ -53,12 +51,21 @@ class LoginInput extends React.Component {
     loginHandler(e, user, pw) {
         e.preventDefault();
         if (this.state.signOrLogin == 'sign') {
+
+            this.handleSignup(e, user, pw);
+            
+
+            /*
             this.context.signUp(e, user, pw);
 
             this.context.updateCurrentUser(user);
             this.props.historyProp.push('/search');
+            */
         } else {
 
+
+            this.handleSubmitJwtAuth(e, user, pw);
+            /*
         let check = this.context.users.some((obj) => obj.user == this.state.username && obj.pw == this.state.pw1);
         
         if (check) {
@@ -66,11 +73,66 @@ class LoginInput extends React.Component {
             this.context.updateCurrentUser(user);
             this.props.historyProp.push('/search');
         }
-        
+        */
         }
     }
 
+
+    handleSignup = (e, user, pw) => {
+        e.preventDefault()
+        //const { full_name, nick_name, user_name, password } = ev.target
+    
+        this.setState({ error: null })
+        AuthApiService.postUser({
+          user_name: user,
+          password: pw
+        })
+          .then(user => {
+            //this.handleSubmitJwtAuth(e, user.user_name, pw);
+            //this.setState({ username: '', pw1:'' })
+            this.setState({signupSuccess:true})
+            
+
+          })
+          .catch(res => {
+            this.setState({ error: res.error })
+          })
+      }
+    
+
+    handleSubmitJwtAuth = (e, user, pw) => {
+        e.preventDefault()
+        this.setState({ error: null })
+    
+        AuthApiService.postLogin({
+          user_name: user,
+          password: pw
+        })
+          .then(res => {
+            this.setState({ username: '', pw1:'' })
+
+            TokenService.saveAuthToken(res.authToken)
+            //this.props.onLoginSuccess()
+            this.context.updateCurrentUser(user);
+            console.log('currentUser updated');
+            this.props.historyProp.push('/search');
+
+          })
+          .catch(res => {
+            this.setState({ error: res.error })
+          })
+      }
+    
     render() {
+        let nowLogin = <h3></h3>;
+
+        if (this.state.signupSuccess) {
+            nowLogin = (
+            <h3>
+                Signup Successful! Please log in.
+            </h3>
+            )
+        }
 
         let pwSection = (
             <>
@@ -85,12 +147,9 @@ class LoginInput extends React.Component {
             <>
                 <button 
                     type="submit" 
-                    disabled={this.validateUsername() || this.validatePw()}>
+                    disabled={this.validatePw()}>
                     Submit
                 </button>
-                <SignupLoginErr 
-                    message={this.validateUsername()}
-                />
                 <SignupLoginErr 
                     message={this.validatePw()}
                 />
@@ -120,9 +179,10 @@ class LoginInput extends React.Component {
 
                             {pwSection}
                         </section>
-
+                        
                         <section className="login-signup-section">
-
+                        {nowLogin}
+                        {this.state.signOrLogin}
                             <input type="radio" name="signlog" id="sign-up" value="sign" defaultChecked onChange={(e) => this.signOrLogin(e.target.value)} />
                             <label htmlFor="sign-up">
                             Sign Up
