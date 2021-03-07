@@ -39,9 +39,9 @@ class Result extends React.Component {
 
         let resultVersion = (
             <div className="result">
-            <Link to={`book/${this.props.id}`}><h2>{this.props.title}</h2></Link>
+            <Link onClick={() => this.context.getReviews(this.props.id)} to={`book/${this.props.id}`}><h2>{this.props.title}</h2></Link>
                 <div>
-                    <Link to={`book/${this.props.id}`}>
+                    <Link onClick={() => this.context.getReviews(this.props.id)} to={`book/${this.props.id}`}>
                         <img src={this.props.src} width="200" />
                     </Link>
                     <div>

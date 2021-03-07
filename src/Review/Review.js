@@ -80,7 +80,7 @@ class Review extends React.Component {
                     <div>
                         <p>{this.props.contents}</p>
                         <p>{this.props.helpCount} people found this helpful</p>
-                        <p>this.props.user: {this.props.user}</p>
+                        {/*<p>this.props.user: {this.props.user}</p>*/}
                         <button type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
                     </div>
                 </div>

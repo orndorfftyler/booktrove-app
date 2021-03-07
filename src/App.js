@@ -7,7 +7,10 @@ import Signup from './Signup/Signup';
 import BookContext from './BookContext';
 import { v4 as uuid } from 'uuid';
 import TokenService from './services/token-service';
-import {API_BASE_URL} from './config';
+//import API_BASE_URL from './config';
+import PrivateRoute from './Utils/PrivateRoute';
+import PublicOnlyRoute from './Utils/PublicOnlyRoute';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 class App extends Component {
@@ -163,32 +166,14 @@ class App extends Component {
           console.error(error)
         })
   }
-/*
-  signUp = (e, user, pw) => {
-    e.preventDefault();
-    
-    let temp = this.state.users;
-    // storing pw in plaintext just for static client testing
-    let newOne = {
-      user: user,
-      pw: pw,
-    }
-
-    temp.push(newOne);
-    this.setState({users: temp});
-    console.log('added new user');
-  }
-*/
  updateCurrentUser = (username) => {
   fetch(`${API_BASE_URL}/users/${username}`, {
     headers: {
       'authorization': `bearer ${TokenService.getAuthToken()}`,
     },
   })
-  .then(res => 
-    res.text())
-    .then(text => console.log(text))
-    /*
+  .then(res => {
+    
     if (res.ok) {
       return res.json()
     }
@@ -201,7 +186,7 @@ class App extends Component {
     
   })
   .catch(error => console.log({ error, updateCurrentUser:'yes' }))
-  */
+  
 }
 
   searchHandler = e => {
@@ -274,6 +259,7 @@ class App extends Component {
       reviews: this.state.reviews,
       //users: this.state.users,
       currentUser: this.state.currentUser,
+      currentUsername: this.state.currentUsername,
       updateTerm: this.updateTerm,
       searchHandler: this.searchHandler,
       addReview: this.addReview,
@@ -299,17 +285,17 @@ class App extends Component {
           component={Landing}
         />
 
-        <Route 
+        <PublicOnlyRoute 
           path='/signup'
           component={Signup}
         />
 
-        <Route 
+        <PrivateRoute 
           path='/search'
           component={Search}
         />
 
-        <Route 
+        <PrivateRoute 
           path='/book/:bookId'
           component={Book}
         />

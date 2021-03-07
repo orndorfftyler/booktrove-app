@@ -6,6 +6,7 @@ const BookContext = React.createContext({
   users: [],
   showHideNewReviewInput: '',
   currentUser: '',
+  currentUsername: '',
   updateTerm: () => {},
   searchHandler: () => {},
   addReview: () => {},

@@ -26,36 +26,37 @@ class Book extends React.Component {
         this.setState({title: title});
     }
 
+    updateShowHideReviewInput(state) {
+        this.setState({showHideReviewInput: state});
+    }
+
     componentDidMount = () => {
 
         window.scrollTo(0,0);
 
-        this.context.getReviews(this.props.match.params.bookId);
-        console.log(` this.context.reviews: ${this.context.reviews}`);
     }
 
     showHideReview(e, bookId, title, content) {
         e.preventDefault();
         //console.log('testFunc ran');
-        this.setState({showHideReviewInput: 'hidden'});
+        this.updateShowHideReviewInput('hidden');
+        //this.setState({showHideReviewInput: 'hidden'});
         this.context.addReview(e, bookId, title, content);
         
     }
 
+
     render() {
-        /*
-        if (!this.state.current) {
-            console.log('resetting this.state.current')
-            let bookId = this.props.match.params.bookId;
-            let current = this.context.results.find(book => book.identifier == bookId);
-            this.setState({current: current});
-        }
-        */
         let bookId = this.props.match.params.bookId;
         let current = this.context.results.find(book => book.identifier == bookId);
-        //console.log(JSON.stringify(bookId));
-        //console.log(this.context.results);
-        
+
+        let reviewUserCheck = 'show';
+        for (let i = 0; i < this.context.reviews.length; i++) {
+            if (this.context.reviews[i]['user'] == this.context.currentUser) {
+                reviewUserCheck = 'hide';
+            }
+        }
+
         return (
             <div className="look">
 
@@ -74,7 +75,7 @@ class Book extends React.Component {
                         linkify={false}
                     />
 
-            <div className={this.state.showHideReviewInput}>
+            <div className={reviewUserCheck/*this.state.showHideReviewInput*/}>
                     <form onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)}>
                         <section className="form-section overview-section">
                             <h3>Have you read this book? What did you think?</h3>
@@ -90,11 +91,11 @@ class Book extends React.Component {
                         </section>
                     </form>
             </div>
-                    {<section>
+                    {/*<section>
                         <h3>Review Name</h3>
                         <p>{JSON.stringify(this.context.reviews)}</p>
                         <p>current user: {this.context.currentUser}</p>
-                    </section>}
+                    </section>*/}
                     
                     {/* use this.context.reviews to generate review list*/}
 

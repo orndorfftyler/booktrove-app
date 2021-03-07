@@ -24,7 +24,6 @@ class LoginInput extends React.Component {
         }
     }
     static contextType = BookContext;
-    
 
     signOrLogin(val) {
         this.setState({signOrLogin:val});
@@ -53,30 +52,11 @@ class LoginInput extends React.Component {
         if (this.state.signOrLogin == 'sign') {
 
             this.handleSignup(e, user, pw);
-            
-
-            /*
-            this.context.signUp(e, user, pw);
-
-            this.context.updateCurrentUser(user);
-            this.props.historyProp.push('/search');
-            */
         } else {
 
-
             this.handleSubmitJwtAuth(e, user, pw);
-            /*
-        let check = this.context.users.some((obj) => obj.user == this.state.username && obj.pw == this.state.pw1);
-        
-        if (check) {
-            //call context function to update current user
-            this.context.updateCurrentUser(user);
-            this.props.historyProp.push('/search');
-        }
-        */
         }
     }
-
 
     handleSignup = (e, user, pw) => {
         e.preventDefault()
@@ -93,11 +73,11 @@ class LoginInput extends React.Component {
             this.setState({signupSuccess:true})
             
 
-          })
+        })
           .catch(res => {
             this.setState({ error: res.error })
-          })
-      }
+        })
+    }
     
 
     handleSubmitJwtAuth = (e, user, pw) => {
@@ -114,14 +94,13 @@ class LoginInput extends React.Component {
             TokenService.saveAuthToken(res.authToken)
             //this.props.onLoginSuccess()
             this.context.updateCurrentUser(user);
-            console.log('currentUser updated');
             this.props.historyProp.push('/search');
 
-          })
+        })
           .catch(res => {
             this.setState({ error: res.error })
-          })
-      }
+        })
+    }
     
     render() {
         let nowLogin = <h3></h3>;
@@ -137,9 +116,9 @@ class LoginInput extends React.Component {
         let pwSection = (
             <>
                 <label htmlFor="pw1">Password</label>
-                <input type="text" name="pw1" id="pw" required onChange={e => this.pw1Update(e.target.value)}/>
+                <input type="password" name="pw1" id="pw1" required onChange={e => this.pw1Update(e.target.value)}/>
                 <label htmlFor="pw2">Confirm Password</label>
-                <input type="text" name="pw2" id="pw" required onChange={e => this.pw2Update(e.target.value)}/>
+                <input type="password" name="pw2" id="pw2" required onChange={e => this.pw2Update(e.target.value)}/>
             </>
         );
 
@@ -160,7 +139,7 @@ class LoginInput extends React.Component {
             pwSection = (
                 <>
                     <label htmlFor="pw1">Password</label>
-                    <input type="text" name="pw1" id="pw" onChange={e => this.pw1Update(e.target.value)}/>
+                    <input type="password" name="pw1" id="pw1" onChange={e => this.pw1Update(e.target.value)}/>
                 </>
             );
             buttonSection = (
