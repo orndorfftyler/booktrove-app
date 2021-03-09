@@ -9,7 +9,8 @@ class ReviewList extends React.Component {
 
     let reviews = this.props.reviews.filter(review => review.bookId == this.props.currentBook.identifier);
     //console.log(reviews);
-    let reviews2 = reviews.map(review => {
+    let reviews1 = reviews.reverse();
+    let reviews2 = reviews1.map(review => {
         return (
 
         <Review 

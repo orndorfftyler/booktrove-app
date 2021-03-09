@@ -84,7 +84,9 @@ class App extends Component {
     e.preventDefault();
 
     let newId = uuid();
-    let cUser = this.state.currentUsername;
+    let cUser = this.state.currentUsername ? this.state.currentUsername : localStorage.getItem('currentUsername');
+
+    console.log(`cUser:  ${cUser} type: ${typeof cUser}`)
 
     let newOne = {
       reviewId: newId,
@@ -124,7 +126,6 @@ class App extends Component {
 
   patchReview = (e, review) => {    
     e.preventDefault();
-
 
     fetch(`${API_BASE_URL}/reviews/${review.reviewId}`, {
         method: 'PATCH',
@@ -183,7 +184,8 @@ class App extends Component {
   .then(resJson => {
     console.log(`username response: ${resJson.id}`);
     this.setState({currentUser: resJson.id, currentUsername: username})
-    
+    localStorage.setItem('currentUsername',username);
+    localStorage.setItem('currentUser', resJson.id);
   })
   .catch(error => console.log({ error, updateCurrentUser:'yes' }))
   
@@ -288,6 +290,7 @@ class App extends Component {
         <PublicOnlyRoute 
           path='/signup'
           component={Signup}
+          historyProp={this.props.history}
         />
 
         <PrivateRoute 

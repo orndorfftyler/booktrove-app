@@ -12,7 +12,8 @@ class Review extends React.Component {
         this.state = {
             edit: false,
             title: this.props.title,
-            contents: this.props.contents
+            contents: this.props.contents,
+            showHideHelpful: 'show'
         }
     }
 
@@ -61,6 +62,7 @@ class Review extends React.Component {
                 helpCount: this.props.helpCount + 1
             }
         );
+        this.setState({showHideHelpful: 'hide'});
     }
 
     updateContent(content) {
@@ -81,14 +83,14 @@ class Review extends React.Component {
                         <p>{this.props.contents}</p>
                         <p>{this.props.helpCount} people found this helpful</p>
                         {/*<p>this.props.user: {this.props.user}</p>*/}
-                        <button type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
+                        <button className={this.state.showHideHelpful} type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
                     </div>
                 </div>
             </div>
 
         );
 
-        if (this.context.currentUser == this.props.user) {
+        if (this.context.currentUser == this.props.user || localStorage.getItem('currentUser') == this.props.user) {
             resultContents = (
                 <div className="result">
                     <h2>{this.props.title}</h2>
@@ -102,8 +104,7 @@ class Review extends React.Component {
                     </div>
                 </div>
             );
-
-        }
+            }
 
         if (this.state.edit == true) {
             resultContents = (

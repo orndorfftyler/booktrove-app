@@ -33,10 +33,16 @@ export default class Nav extends React.Component {
     
 
     render() {
-
+/*
+        localStorage.getItem('currentUsername')
+        let displayUser = localStorage.getItem('currentUsername') 
+        ? localStorage.getItem('currentUsername') 
+        : 'none';
+*/
         let displayUser = this.context.currentUsername 
-            ? this.context.currentUsername 
-            : 'none';
+            || localStorage.getItem('currentUsername') 
+            || 'none';
+            
         return (
             <nav className='Nav'>
                 <p>Current User: {displayUser}</p>

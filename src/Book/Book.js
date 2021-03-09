@@ -39,8 +39,7 @@ class Book extends React.Component {
     showHideReview(e, bookId, title, content) {
         e.preventDefault();
         //console.log('testFunc ran');
-        this.updateShowHideReviewInput('hidden');
-        //this.setState({showHideReviewInput: 'hidden'});
+        this.updateShowHideReviewInput('hide');
         this.context.addReview(e, bookId, title, content);
         
     }
@@ -51,12 +50,25 @@ class Book extends React.Component {
         let current = this.context.results.find(book => book.identifier == bookId);
 
         let reviewUserCheck = 'show';
-        for (let i = 0; i < this.context.reviews.length; i++) {
-            if (this.context.reviews[i]['user'] == this.context.currentUser) {
-                reviewUserCheck = 'hide';
+        if (this.context.currentUser) {
+            for (let i = 0; i < this.context.reviews.length; i++) {
+                if (this.context.reviews[i]['user'] == this.context.currentUser) {
+                    reviewUserCheck = 'hide';
+                }
+            }
+    
+        } else {
+            for (let i = 0; i < this.context.reviews.length; i++) {
+                if (this.context.reviews[i]['user'] == localStorage.getItem('currentUser')) {
+                    reviewUserCheck = 'hide';
+                }
             }
         }
 
+        console.log(`reviewUserCheck: ${reviewUserCheck}`)
+        console.log(`this.state.showHideReviewInput: ${this.state.showHideReviewInput}`)
+        console.log(`localStorage.getItem('currentUser'): ${localStorage.getItem('currentUser')}`)
+        
         return (
             <div className="look">
 
@@ -75,7 +87,8 @@ class Book extends React.Component {
                         linkify={false}
                     />
 
-            <div className={reviewUserCheck/*this.state.showHideReviewInput*/}>
+            <div className={reviewUserCheck}>
+                <div className={this.state.showHideReviewInput}>
                     <form onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)}>
                         <section className="form-section overview-section">
                             <h3>Have you read this book? What did you think?</h3>
@@ -90,6 +103,7 @@ class Book extends React.Component {
                             <button  type="submit">Submit</button>
                         </section>
                     </form>
+                </div>
             </div>
                     {/*<section>
                         <h3>Review Name</h3>
