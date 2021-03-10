@@ -4,6 +4,8 @@ import Book from './Book/Book';
 import Landing from './Landing/Landing';
 import Search from './Search/Search';
 import Signup from './Signup/Signup';
+import Login from './Login/Login';
+
 import BookContext from './BookContext';
 import { v4 as uuid } from 'uuid';
 import TokenService from './services/token-service';
@@ -322,6 +324,12 @@ acquireHelpfulId = (e, user_id, review_id) => {
         <PublicOnlyRoute 
           path='/signup'
           component={Signup}
+          historyProp={this.props.history}
+        />
+
+        <PublicOnlyRoute 
+          path='/login'
+          component={Login}
           historyProp={this.props.history}
         />
 
