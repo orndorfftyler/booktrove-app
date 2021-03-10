@@ -241,66 +241,15 @@ class App extends Component {
     //console.log(this.state.results)
   }
 //------------------------------------------------------------ helpful count fetches
-
+/*
 updateHelpfulPerBook = (helpfuls) => {
   this.setState({
     helpfulPerBook: helpfuls 
   })
 }
+*/
 
-getHelpfulPerBook = (bookId) => {
-  fetch(`${API_BASE_URL}/helpfulbook/${bookId}`, {
-    headers: {
-      'authorization': `bearer ${TokenService.getAuthToken()}`,
-    },
-  })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      throw new Error(res.status)
-    })
-    .then(resJson =>
-      
-      this.updateHelpfulPerBook(resJson)
-      
-      )
-    .catch(error => console.log({ error }))
-}
-
-postHelpful = (e, book_id, user_id, review_id) => {    
-  e.preventDefault();
-
-  let newHelp = {
-    book_id: book_id,
-    user_id: user_id,
-    review_id: review_id
-  }
-
-  fetch(`${API_BASE_URL}/helpfulbook/${book_id}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-      body: JSON.stringify(newHelp)
-  })
-      .then(res => {
-          if (res.ok) {
-          return res.json()
-          }
-          throw new Error(res.status)
-      })
-      .then(data => {
-        this.getHelpfulPerBook(book_id);
-
-      })
-      .catch(error => {
-          console.error(error)
-      })
-      
-}
-
+/*
 acquireHelpfulId = (e, user_id, review_id) => {    
   e.preventDefault();
 
@@ -331,28 +280,8 @@ acquireHelpfulId = (e, user_id, review_id) => {
       })
       
 }
+*/
 
-deleteHelpful = (e, help_id, book_id) => {
-  e.preventDefault();
-  fetch(`${API_BASE_URL}/helpful/${help_id}`, {
-      method: 'DELETE',
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      }
-      })
-      .then(res => {
-          if (!res.ok) {
-              throw new Error(res.status)
-          }
-      })
-      .then(data => {
-        this.getHelpfulPerBook(book_id);
-          
-      })
-      .catch(error => {
-        console.error(error)
-      })
-}
 
 
 
@@ -370,10 +299,10 @@ deleteHelpful = (e, help_id, book_id) => {
       getReviews: this.getReviews,
       patchReview: this.patchReview,
       deleteReview: this.deleteReview,
-      getHelpfulPerBook: this.getHelpfulPerBook,
-      postHelpful: this.postHelpful,
-      acquireHelpfulId: this.acquireHelpfulId,
-      deleteHelpful: this.deleteHelpful
+      //getHelpfulPerBook: this.getHelpfulPerBook,
+      //postHelpful: this.postHelpful,
+      //acquireHelpfulId: this.acquireHelpfulId,
+      //deleteHelpful: this.deleteHelpful
     };
 
   return (

@@ -2,6 +2,10 @@ import React from 'react';
 import BookContext from '../BookContext';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
+import TokenService from '../services/token-service';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
 class Review extends React.Component {
 
@@ -13,7 +17,10 @@ class Review extends React.Component {
             edit: false,
             title: this.props.title,
             contents: this.props.contents,
-            showHideHelpful: 'show'
+            showHideHelpful: 'show',
+            helpfulCount: 0,
+            helpfulData: [],
+            alreadyHelp: false
         }
     }
 
@@ -26,17 +33,6 @@ class Review extends React.Component {
     editOff() {
         this.setState({edit:false});
     }
-/*
-    patchHelper() {
-        return {
-            reviewId: this.props.reviewId,
-            bookId: this.props.bookId,
-            title: this.state.title,
-            contents: this.state.contents,
-            helpCount: this.props.helpCount
-          }
-    }
-*/
     editReviewHideInput(e/*, reviewId, title, content*/) {
         e.preventDefault();
         this.setState({edit:false});
@@ -52,19 +48,6 @@ class Review extends React.Component {
         );
     }
 
-    helpCountIncrease(e) {
-        this.context.patchReview(e, 
-            {
-                reviewId: this.props.reviewId,
-                bookId: this.props.bookId,
-                title: this.state.title,
-                contents: this.state.contents,
-                helpCount: this.props.helpCount + 1
-            }
-        );
-        this.setState({showHideHelpful: 'hide'});
-    }
-
     updateContent(content) {
         this.setState({contents: content});
     }
@@ -73,7 +56,94 @@ class Review extends React.Component {
         this.setState({title: title});
     }
 
+    componentDidMount() {
+        this.getHelpfulPerReview(this.props.reviewId);
+    }
+
+
+    helpCountIncrease = (e) => {
+            
+        e.preventDefault();
+        
+        let newHelp = {
+            book_id: this.props.bookId,
+            user_id: this.props.user,
+            review_id: this.props.reviewId
+        }
+        //console.log(`newHelp: ${JSON.stringify(newHelp)}`)
+        //console.log(`this.context.reviews: ${JSON.stringify(this.context.reviews)}`)
+        
+        fetch(`${API_BASE_URL}/helpfulreview/${this.props.reviewId}`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+            body: JSON.stringify(newHelp)
+        })
+            .then(res => {
+                if (res.ok) {
+                return res.json()
+                }
+                throw new Error(res.status)
+            })
+            .then(data => {
+                this.getHelpfulPerReview(this.props.reviewId);
+                //this.setState({alreadyHelp: true});
+        
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
+    alreadyHelpCheck() {
+        for (let i = 0; i < this.state.helpfulData.length; i++) {
+            if (this.props.user == this.state.helpfulData[i]['user_id']) {
+                this.setState({alreadyHelp: true});
+            }
+            //console.log(`this.state.helpfulData[i]['user_id'] : ${this.state.helpfulData[i]['user_id']}`)
+        }
+
+        //console.log(`this.props.user: ${this.props.user}`)
+        //console.log(`this.state.helpfulData: ${JSON.stringify(this.state.helpfulData)}`)
+        //console.log(`this.state.alreadyHelp: ${this.state.alreadyHelp}`)
+    }
+
+    getHelpfulPerReview = (reviewId) => {
+        fetch(`${API_BASE_URL}/helpfulreview/${reviewId}`, {
+            headers: {
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+        })
+            .then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            throw new Error(res.status)
+            })
+            .then(resJson => 
+                {
+                this.setState({
+                    helpfulCount: resJson.length,
+                    helpfulData: resJson
+                });
+                this.alreadyHelpCheck();
+            }
+            )
+             
+            
+            .catch(error => console.log({ error }))
+            }
+
+
+
     render() {
+
+
+        let helpfulButton = this.state.alreadyHelp 
+            ? <p></p>
+            : <button className={this.state.showHideHelpful} type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
 
         let resultContents = (
             <div className="result">
@@ -81,9 +151,9 @@ class Review extends React.Component {
                 <div>
                     <div>
                         <p>{this.props.contents}</p>
-                        <p>{this.props.helpCount} people found this helpful</p>
+                        <p>{this.state.helpfulCount} people found this helpful</p>
                         {/*<p>this.props.user: {this.props.user}</p>*/}
-                        <button className={this.state.showHideHelpful} type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
+                        {helpfulButton}
                     </div>
                 </div>
             </div>
@@ -97,7 +167,7 @@ class Review extends React.Component {
                     <div>
                         <div>
                             <p>{this.props.contents}</p>
-                            <p>{this.props.helpCount} people found this helpful</p>
+                            <p>{this.state.helpfulCount} people found this helpful</p>
                             <button type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
                             <button type="submit" onClick={(e) => this.context.deleteReview(e, this.props.reviewId, this.props.bookId)}>Delete</button>
                         </div>
