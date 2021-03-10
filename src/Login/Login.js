@@ -1,12 +1,9 @@
 import React from 'react';
 import SignupLoginErr from '../ErrorComps/SignupLoginErr';
 import BookContext from '../BookContext';
-//import { withRouter } from 'react-router-dom';
-//import { useHistory } from "react-router-dom";
 
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
-
 
 //import './Signup.css';
 
@@ -15,19 +12,12 @@ class LoginInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            signOrLogin:'sign',
             username: '',
             pw1: '',
-            pw2: '',
             error: null,
-            signupSuccess: false
         }
     }
     static contextType = BookContext;
-
-    signOrLogin(val) {
-        this.setState({signOrLogin:val});
-    }
 
     usernameUpdate(val) {
         this.setState({username:val});
@@ -37,48 +27,6 @@ class LoginInput extends React.Component {
         this.setState({pw1:val});
     }
 
-    pw2Update(val) {
-        this.setState({pw2:val});
-    }
-
-    validatePw() {
-        if (this.state.pw1 != this.state.pw2) {
-            return 'passwords do not match';
-        } 
-    }
-
-    loginHandler(e, user, pw) {
-        e.preventDefault();
-        if (this.state.signOrLogin == 'sign') {
-
-            this.handleSignup(e, user, pw);
-        } else {
-
-            this.handleSubmitJwtAuth(e, user, pw);
-        }
-    }
-
-    handleSignup = (e, user, pw) => {
-        e.preventDefault()
-        //const { full_name, nick_name, user_name, password } = ev.target
-    
-        this.setState({ error: null })
-        AuthApiService.postUser({
-          user_name: user,
-          password: pw
-        })
-          .then(user => {
-            //this.handleSubmitJwtAuth(e, user.user_name, pw);
-            //this.setState({ username: '', pw1:'' })
-            this.setState({signupSuccess:true})
-            
-
-        })
-          .catch(res => {
-            this.setState({ error: res.error })
-        })
-    }
-    
 
     handleSubmitJwtAuth = (e, user, pw) => {
         e.preventDefault()
@@ -103,85 +51,50 @@ class LoginInput extends React.Component {
     }
     
     render() {
-        let nowLogin = <h3></h3>;
 
-        if (this.state.signupSuccess) {
-            nowLogin = (
-            <h3>
-                Signup Successful! Please log in.
-            </h3>
-            )
-        }
 
-        let pwSection = (
-            <>
-                <label htmlFor="pw1">Password</label>
-                <input type="password" name="pw1" id="pw1" required onChange={e => this.pw1Update(e.target.value)}/>
-                <label htmlFor="pw2">Confirm Password</label>
-                <input type="password" name="pw2" id="pw2" required onChange={e => this.pw2Update(e.target.value)}/>
-            </>
-        );
-
-        let buttonSection = (
-            <>
-                <button 
-                    type="submit" 
-                    disabled={this.validatePw()}>
-                    Submit
-                </button>
-                <SignupLoginErr 
-                    message={this.validatePw()}
-                />
-            </>
-        );
-
-        if (this.state.signOrLogin == 'log') {
-            pwSection = (
+            let pwSection = (
                 <>
                     <label htmlFor="pw1">Password</label>
                     <input type="password" name="pw1" id="pw1" onChange={e => this.pw1Update(e.target.value)}/>
                 </>
             );
-            buttonSection = (
+            let buttonSection = (
                 <button type="submit" >
                     Submit
                 </button>
             );
-        }
 
 
         return (
-                    <form onSubmit={(e) => this.loginHandler(e, this.state.username, this.state.pw1)}>
-                        <section className="overview-section">
-                            <label htmlFor="username">Username</label>
-                            <input type="text" name="username" placeholder="bookie411" required onChange={e => this.usernameUpdate(e.target.value)}/>
+                <div className="look">
+                    <nav role="navigation"></nav>
+                    <main role="main">
+                        <header>
+                            <h1>Login to BookTrove!</h1>
+                            
+                        </header>
 
-                            {pwSection}
-                        </section>
-                        
-                        <section className="login-signup-section">
-                        {nowLogin}
-                        {this.state.signOrLogin}
-                            <input type="radio" name="signlog" id="sign-up" value="sign" defaultChecked onChange={(e) => this.signOrLogin(e.target.value)} />
-                            <label htmlFor="sign-up">
-                            Sign Up
-                            </label>
+                        <form onSubmit={(e) => this.handleSubmitJwtAuth(e, this.state.username, this.state.pw1)}>
+                            <section className="overview-section">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" name="username" placeholder="bookie411" required onChange={e => this.usernameUpdate(e.target.value)}/>
 
-                            <input type="radio" name="signlog" id="log-in" value="log" onChange={(e) => this.signOrLogin(e.target.value)}/>
-                            <label htmlFor="log-in">
-                            Log In
-                            </label>
+                                {pwSection}
+                            </section>
+                            
+                            <section className="button-section">
+                                {buttonSection}
+                                {/*<p>{JSON.stringify(this.context.users)}</p>
+                                <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
 
-                        </section>  
+                            </section>
 
-                        <section className="button-section">
-                            {buttonSection}
-                            {/*<p>{JSON.stringify(this.context.users)}</p>
-                            <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
+                        </form>
+                    </main>
 
-                        </section>
+                </div>
 
-                    </form>
         );
     }
 }
