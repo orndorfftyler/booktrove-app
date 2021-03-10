@@ -3,19 +3,21 @@ import React from 'react'
 const BookContext = React.createContext({
   results: [],
   reviews: [],
-  users: [],
   showHideNewReviewInput: '',
   currentUser: '',
   currentUsername: '',
+  helpfulPerBook: [],
   updateTerm: () => {},
   searchHandler: () => {},
   addReview: () => {},
-  signUp: () => {},
   updateCurrentUser: () => {},
-  //editReview: () => {},
   getReviews:() => {},
   patchReview: () => {},
   deleteReview: () => {},
+  getHelpfulPerBook: () => {},
+  postHelpful: () => {},
+  acquireHelpfulId: () => {},
+  deleteHelpful: () => {}
 
 
 })

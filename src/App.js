@@ -19,19 +19,9 @@ class App extends Component {
     this.state = {
       results : [],
       reviews: [],
-      /*users:[
-        {
-          user: 'admin',
-          pw:'admin'
-        },
-        {
-          user: 'Squirtle',
-          pw:'sss'
-        }
-
-      ],*/
       currentUser: '',
       currentUsername: '',
+      helpfulPerBook: [],
       term: '',
       searchURL_TM: 'https://www.googleapis.com/books/v1/volumes',
       apiKey: 'AIzaSyB8fDuAtzPrAe0raudJ4-7rfgZZFlkOYMU'
@@ -114,8 +104,6 @@ class App extends Component {
         })
         .then(data => {
           this.getReviews(bookId);
-          console.log('hey')
-            //this.props.history.push('/');
 
         })
         .catch(error => {
@@ -252,6 +240,119 @@ class App extends Component {
     this.setState({results: out2})
     //console.log(this.state.results)
   }
+//------------------------------------------------------------ helpful count fetches
+
+updateHelpfulPerBook = (helpfuls) => {
+  this.setState({
+    helpfulPerBook: helpfuls 
+  })
+}
+
+getHelpfulPerBook = (bookId) => {
+  fetch(`${API_BASE_URL}/helpfulbook/${bookId}`, {
+    headers: {
+      'authorization': `bearer ${TokenService.getAuthToken()}`,
+    },
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      }
+      throw new Error(res.status)
+    })
+    .then(resJson =>
+      
+      this.updateHelpfulPerBook(resJson)
+      
+      )
+    .catch(error => console.log({ error }))
+}
+
+postHelpful = (e, book_id, user_id, review_id) => {    
+  e.preventDefault();
+
+  let newHelp = {
+    book_id: book_id,
+    user_id: user_id,
+    review_id: review_id
+  }
+
+  fetch(`${API_BASE_URL}/helpfulbook/${book_id}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(newHelp)
+  })
+      .then(res => {
+          if (res.ok) {
+          return res.json()
+          }
+          throw new Error(res.status)
+      })
+      .then(data => {
+        this.getHelpfulPerBook(book_id);
+
+      })
+      .catch(error => {
+          console.error(error)
+      })
+      
+}
+
+acquireHelpfulId = (e, user_id, review_id) => {    
+  e.preventDefault();
+
+  let body = {
+    user_id: user_id
+  }
+
+  fetch(`${API_BASE_URL}/helpfulreview/${review_id}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify(body)
+  })
+      .then(res => {
+          if (res.ok) {
+          return res.json()
+          }
+          throw new Error(res.status)
+      })
+      .then(data => {
+        this.deleteHelpful(data.id, data.book_id);
+
+      })
+      .catch(error => {
+          console.error(error)
+      })
+      
+}
+
+deleteHelpful = (e, help_id, book_id) => {
+  e.preventDefault();
+  fetch(`${API_BASE_URL}/helpful/${help_id}`, {
+      method: 'DELETE',
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      }
+      })
+      .then(res => {
+          if (!res.ok) {
+              throw new Error(res.status)
+          }
+      })
+      .then(data => {
+        this.getHelpfulPerBook(book_id);
+          
+      })
+      .catch(error => {
+        console.error(error)
+      })
+}
 
 
 
@@ -259,18 +360,20 @@ class App extends Component {
     const contextValue = {
       results: this.state.results,
       reviews: this.state.reviews,
-      //users: this.state.users,
       currentUser: this.state.currentUser,
       currentUsername: this.state.currentUsername,
+      helpfulPerBook: this.state.helpfulPerBook,
       updateTerm: this.updateTerm,
       searchHandler: this.searchHandler,
       addReview: this.addReview,
-      //signUp: this.signUp,
       updateCurrentUser: this.updateCurrentUser,
-      //editReview: this.editReview,
       getReviews: this.getReviews,
       patchReview: this.patchReview,
-      deleteReview: this.deleteReview
+      deleteReview: this.deleteReview,
+      getHelpfulPerBook: this.getHelpfulPerBook,
+      postHelpful: this.postHelpful,
+      acquireHelpfulId: this.acquireHelpfulId,
+      deleteHelpful: this.deleteHelpful
     };
 
   return (
