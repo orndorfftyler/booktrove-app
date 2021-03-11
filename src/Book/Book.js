@@ -65,9 +65,11 @@ class Book extends React.Component {
             }
         }
 
-        console.log(`reviewUserCheck: ${reviewUserCheck}`)
-        console.log(`this.state.showHideReviewInput: ${this.state.showHideReviewInput}`)
-        console.log(`localStorage.getItem('currentUser'): ${localStorage.getItem('currentUser')}`)
+        //console.log(`reviewUserCheck: ${reviewUserCheck}`)
+        //console.log(`this.state.showHideReviewInput: ${this.state.showHideReviewInput}`)
+        //console.log(`localStorage.getItem('currentUser'): ${localStorage.getItem('currentUser')}`)
+        //console.log(`this.context.reviews: ${JSON.stringify(this.context.reviews)}`)
+        console.log(`this.context.results: ${JSON.stringify(this.context.results)}`)
         
         return (
             <div className="look">

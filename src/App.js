@@ -240,7 +240,7 @@ class App extends Component {
       }
     ))
     this.setState({results: out2})
-    //console.log(this.state.results)
+    console.log(this.state.results)
   }
 //------------------------------------------------------------ helpful count fetches
 /*

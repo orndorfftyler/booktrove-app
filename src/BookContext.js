@@ -14,10 +14,10 @@ const BookContext = React.createContext({
   getReviews:() => {},
   patchReview: () => {},
   deleteReview: () => {},
-  getHelpfulPerBook: () => {},
-  postHelpful: () => {},
-  acquireHelpfulId: () => {},
-  deleteHelpful: () => {}
+  //getHelpfulPerBook: () => {},
+  //postHelpful: () => {},
+  //acquireHelpfulId: () => {},
+  //deleteHelpful: () => {}
 
 
 })
