@@ -24,19 +24,14 @@
     right: 0;
     z-index: 10;
   }
-  
-  
+  /*
+  section {
+    background-color: #ddd;
+  }
+*/
   
   header {
     padding: 5% 0;
   }
   
-  section {
-    min-height: 200px;
-    padding: 6% 0;
-    background-color: #bbb;
-  }
   
-  section:nth-child(even) {
-    background-color: #ddd;
-  }

@@ -3,6 +3,8 @@ import BookContext from '../BookContext';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
 import TokenService from '../services/token-service';
+import './Review.css';
+
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -146,7 +148,7 @@ class Review extends React.Component {
             : <button className={this.state.showHideHelpful} type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
 
         let resultContents = (
-            <div className="result">
+            <div className="review">
                 <h2>{this.props.title}</h2>
                 <div>
                     <div>
@@ -162,7 +164,7 @@ class Review extends React.Component {
 
         if (this.context.currentUser == this.props.user || localStorage.getItem('currentUser') == this.props.user) {
             resultContents = (
-                <div className="result">
+                <div className="review">
                     <h2>{this.props.title}</h2>
                     <div>
                         <div>

@@ -8,7 +8,7 @@ class Landing extends React.Component {
 
     render() {
         return (
-            <div className="look">
+            <div className="landing-page">
                 <nav></nav>
                 <main>
                     <header>
@@ -23,17 +23,17 @@ class Landing extends React.Component {
                     </section>
             
                     <section>
-                    <h3>Want to tell the world about an amazing book you just read? Look no further!</h3>
-                    <p>Your reviews will be adored by dozens of amped up BookTrovers.</p>
+                        <h3>Want to tell the world about an amazing book you just read? Look no further!</h3>
+                        <p>Your reviews will be adored by dozens of amped up BookTrovers.</p>
                     </section>
             
                     <section>
                         <h3>Find a book review you don't like? No problem!</h3>
-                    <p>BookTrove lets you rate reviews! Your feedback matters!</p>
+                        <p>BookTrove lets you rate reviews! Your feedback matters!</p>
                     </section>
             
                     <section >
-                    <Link to='/signup'><button type="button">Let's Go!</button></Link>
+                        <Link to='/signup'><button type="button">Let's Go!</button></Link>
                     </section>
             
                 </main>

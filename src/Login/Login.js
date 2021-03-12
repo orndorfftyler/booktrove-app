@@ -4,8 +4,10 @@ import BookContext from '../BookContext';
 
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
+import { Link } from 'react-router-dom';
 
-//import './Signup.css';
+
+import './Login.css';
 
 class LoginInput extends React.Component {
 
@@ -52,6 +54,7 @@ class LoginInput extends React.Component {
     
     render() {
 
+            let errorMessage = <p>{this.state.error}</p>;
 
             let pwSection = (
                 <>
@@ -65,9 +68,8 @@ class LoginInput extends React.Component {
                 </button>
             );
 
-
         return (
-                <div className="look">
+                <div className="login-page">
                     <nav role="navigation"></nav>
                     <main role="main">
                         <header>
@@ -81,13 +83,17 @@ class LoginInput extends React.Component {
                                 <input type="text" name="username" placeholder="bookie411" required onChange={e => this.usernameUpdate(e.target.value)}/>
 
                                 {pwSection}
-                            </section>
-                            
-                            <section className="button-section">
+                                <h3>
+                                    Need an account? Sign up   
+                                    <Link to='/signup'>
+                                        here 
+                                    </Link>
+                                </h3>
+
                                 {buttonSection}
                                 {/*<p>{JSON.stringify(this.context.users)}</p>
                                 <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
-
+                                {errorMessage}
                             </section>
 
                         </form>

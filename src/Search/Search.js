@@ -11,8 +11,7 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div className="look">
-
+            <div className="search-page">
                 <Navbar 
                     historyProp={this.props.history}
                 />
@@ -26,7 +25,6 @@ class Search extends React.Component {
                 <ResultList 
                     results={this.context.results}
                 />
-        
             </div>
         );
     }

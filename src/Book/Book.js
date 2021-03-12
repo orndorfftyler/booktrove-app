@@ -65,20 +65,14 @@ class Book extends React.Component {
             }
         }
 
-        //console.log(`reviewUserCheck: ${reviewUserCheck}`)
-        //console.log(`this.state.showHideReviewInput: ${this.state.showHideReviewInput}`)
-        //console.log(`localStorage.getItem('currentUser'): ${localStorage.getItem('currentUser')}`)
-        //console.log(`this.context.reviews: ${JSON.stringify(this.context.reviews)}`)
-        console.log(`this.context.results: ${JSON.stringify(this.context.results)}`)
         
         return (
-            <div className="look">
+            <div className="book-page">
 
                 <Navbar 
                     historyProp={this.props.history}
                 />
 
-                <main role="main">
                     <Result 
                         title={current.title}
                         src={current.src}
@@ -120,13 +114,12 @@ class Book extends React.Component {
                         currentBook={current}
                         historyProp={this.props.history}
                     />
-                    <section>
+                    {/*<section>
                         <h3>Placeholder Review</h3>
                         <p>This is where reviews will go</p>
                         <p>8 people found this helpful</p>
-                    </section>
+                    </section>*/}
                     
-                </main>
 
             </div>
         );

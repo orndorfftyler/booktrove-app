@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import BookContext from '../BookContext';
 import TokenService from '../services/token-service';
-
+import './Navbar.css';
 
 export default class Nav extends React.Component {
     static contextType = BookContext;
@@ -44,11 +44,13 @@ export default class Nav extends React.Component {
             || 'none';
             
         return (
-            <nav className='Nav'>
+            <nav >
                 <p>Current User: {displayUser}</p>
+                <div>
                 {TokenService.hasAuthToken()
                     ? this.renderLogoutLink()
                     : this.renderLoginLink()}
+                </div>
             </nav>
         );
     }

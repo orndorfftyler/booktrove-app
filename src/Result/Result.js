@@ -2,6 +2,7 @@ import React from 'react';
 import BookContext from '../BookContext';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
+import './Result.css';
 
 class Result extends React.Component {
 
@@ -9,67 +10,75 @@ class Result extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            desc: this.props.description ? this.props.description.slice(0,100) : '',
+            desc: this.props.description ? this.props.description.split(' ').slice(0,50).join(' ') : '',
             buttonLabel:'More'
         }
     }
 
+
+
     showHideDesc() {
-        if (this.state.desc && this.state.desc.length <= 100) {
+        if (this.state.desc && this.state.desc.split(' ').length <= 50) {
             this.setState({
                 desc:this.props.description,
                 buttonLabel: 'Less'
             })
-        } else if (this.state.desc && this.state.desc.length > 100) {
+        } else if (this.state.desc && this.state.desc.split(' ').length > 50) {
             this.setState({
-                desc:this.props.description.slice(0,100),
+                desc:this.props.description.split(' ').slice(0,50).join(' '),
                 buttonLabel: 'More'
             })
         }
+
     }
 
     render() {
 
         let buttonVersion = '';
-        if (this.props.description) {
+        if (this.props.description.split(' ').length > 50) {
             buttonVersion = (
-                <button type="button" onClick={() => this.showHideDesc()}>{this.state.buttonLabel}</button>
+                <button className="showHide" type="button" onClick={() => this.showHideDesc()}>{this.state.buttonLabel}</button>
             );
         } 
 
+        let descText = this.state.desc;
+        if (this.props.description.split(' ').length > 50 && this.state.desc.split(' ').length <= 50) {
+            descText = this.state.desc + '...'
+        } 
+
         let resultVersion = (
-            <div className="result">
+            <section className="result">
             <Link onClick={() => this.context.getReviews(this.props.id)} to={`book/${this.props.id}`}><h2>{this.props.title}</h2></Link>
-                <div>
+                <div className="picdesc">
                     <Link onClick={() => this.context.getReviews(this.props.id)} to={`book/${this.props.id}`}>
                         <img src={this.props.src} width="200" />
                     </Link>
-                    <div>
-                        <p>Author: {this.props.author}</p>
-                        <p>Publisher: {this.props.details}</p>
-                        {this.state.desc}
+                    <div className="desc">
+                        <p>Author: {this.props.author.join(', ')}</p>
+                        {/*<p>Publisher: {this.props.details}</p>*/}
+                        <p>{descText}</p>
                         {/*<p onClick={() => this.context.detailsHandler(this.props.title)}>Show/Hide Details (click me)</p> */}
                         {buttonVersion}
                     </div>
                 </div>
-            </div>
+            </section>
             
         );
         if (this.props.linkify == false) {
             resultVersion = (
-            <div className="result">
+            <section className="result">
             <h2>{this.props.title}</h2>
-                <div>
+                <div className="picdesc">
                         <img src={this.props.src} width="200" />
-                    <div>
-                        <p >Author: {this.props.author}</p>
-                        <p>Publisher: {this.props.details}</p>
-                        {this.state.desc}
+                    <div className="desc">
+                    <p>Author: {this.props.author.join(' ')}</p>
+                        {/*<p>Publisher: {this.props.details}</p>*/}
+                        <p>{descText}</p>
                         {/*<p onClick={() => this.context.detailsHandler(this.props.title)}>Show/Hide Details (click me)</p> */}
                         {buttonVersion}
                     </div>
                 </div>
-            </div>
+            </section>
             )
         }
     

@@ -61,6 +61,8 @@ class Signup extends React.Component {
     
     render() {
 
+        let errorMessage = <p>{this.state.error}</p>;
+
         let nowLogin = <h3></h3>;
 
         if (this.state.signupSuccess) {
@@ -97,7 +99,7 @@ class Signup extends React.Component {
         );
 
         return (
-                <div className="look">
+                <div className="signup-page">
                     <nav role="navigation"></nav>
                     <main role="main">
                         <header>
@@ -128,7 +130,7 @@ class Signup extends React.Component {
                                 {buttonSection}
                                 {/*<p>{JSON.stringify(this.context.users)}</p>
                                 <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
-
+                                {errorMessage}
                             </section>
 
                         </form>

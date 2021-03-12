@@ -21,8 +21,6 @@ class ResultList extends React.Component {
 
         )
     } )
-    console.log(this.props.results);
-    console.log(results);
 
     return (
         <>

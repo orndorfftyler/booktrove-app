@@ -5,10 +5,8 @@ import Review from '../Review/Review';
 class ReviewList extends React.Component {
 
     render() {
-   //console.log(this.props.currentBook);
 
     let reviews = this.props.reviews.filter(review => review.bookId == this.props.currentBook.identifier);
-    //console.log(reviews);
     let reviews1 = reviews.reverse();
     let reviews2 = reviews1.map(review => {
         return (
@@ -25,8 +23,6 @@ class ReviewList extends React.Component {
         />
         )
     } )
-    //console.log(this.props.reviews);
-    //console.log(reviews);
 
     return (
         <>
