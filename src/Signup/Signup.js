@@ -152,7 +152,6 @@ class Signup extends React.Component {
 
                         </form>
                     </main>
-                    <footer></footer>
 
                 </div>
 

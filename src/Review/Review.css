@@ -38,7 +38,7 @@ form.edit {
 }
 
 button.edit, button.helpful {
-  font-size: 24px;
+  font-size: 18px;
   font-family:'Fjalla One',sans-serif;
   outline:none;
   background:#FFF;
@@ -52,7 +52,7 @@ button.edit, button.helpful {
 }
 
 button.helpful {
-  width:150px;
+  width:170px;
   height:80px;
 }
 

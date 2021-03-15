@@ -116,7 +116,6 @@ class LoginInput extends React.Component {
                                 </div>
                         </form>
                     </main>
-                    <footer></footer>
                 </div>
 
         );
