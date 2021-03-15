@@ -18,7 +18,7 @@ class Landing extends React.Component {
                         <p>To get started, click the "Let's Go!" button to go the sign up page. </p>
                         <p>From there, feel free to follow the link to the login page and use the admin account:</p>
                         <p>username: admin</p>
-                        <p>password admin</p>
+                        <p>password: admin</p>
                         <p>Then search for a book using the search page. Click on a result to write and rate reviews!</p>
 
                         <Link to='/signup'><button className="landing" type="button">Let's Go!</button></Link>
