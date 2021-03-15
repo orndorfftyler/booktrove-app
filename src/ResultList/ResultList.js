@@ -5,22 +5,29 @@ import Result from '../Result/Result';
 class ResultList extends React.Component {
 
     render() {
-    const results = this.props.results.map((book) => {
-        return (
+        let results = '';
 
-        <Result 
-            key={book.identifier}
-            title={book.title}
-            src={book.src}
-            author={book.author}
-            description={book.description}
-            details={book.details}
-            id={book.identifier}
-            linkify={true}
-        />
+        if (this.props.results) {
+            results = this.props.results.map((book) => {
 
-        )
-    } )
+            return (
+                <Result 
+                    key={book.identifier}
+                    title={book.title}
+                    src={book.src}
+                    author={book.author}
+                    description={book.description}
+                    details={book.details}
+                    id={book.identifier}
+                    linkify={true}
+                />
+                )
+            })
+        }
+
+        if (!results) {
+            results = <p>No results</p>
+        }
 
     return (
         <>

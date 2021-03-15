@@ -6,6 +6,7 @@ class ReviewList extends React.Component {
 
     render() {
 
+    console.log(`this.context.reviews: ${this.props.reviews}`)
     let reviews = this.props.reviews.filter(review => review.bookId == this.props.currentBook.identifier);
     let reviews1 = reviews.reverse();
     let reviews2 = reviews1.map(review => {
@@ -22,10 +23,16 @@ class ReviewList extends React.Component {
             historyProp={this.props.historyProp}
         />
         )
-    } )
+    } );
+
+    let title = '';
+    if (reviews.length >= 1) {
+        title = <p className="reviewList">Reviews:</p>
+    }
 
     return (
         <>
+        {title}
         {reviews2}
         </>
     )

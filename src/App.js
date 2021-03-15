@@ -12,6 +12,7 @@ import TokenService from './services/token-service';
 //import API_BASE_URL from './config';
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicOnlyRoute from './Utils/PublicOnlyRoute';
+import './App.css';
 
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -222,7 +223,7 @@ class App extends Component {
         }
     })
     .then(responseJson => this.updateResults(responseJson))
-    .catch(error => {console.log(error.message)});
+    .catch(error => {this.setState({results: ''})});
 
 
     //update state - format as an array of objects
@@ -312,12 +313,7 @@ acquireHelpfulId = (e, user_id, review_id) => {
   return (
     <div className='App'>
       <BookContext.Provider value={contextValue}>
-      <header>
-          {/*<Nav />*/}
-          
-      </header>
 
-      <main>
         <Route 
           exact path='/'
           component={Landing}
@@ -345,9 +341,9 @@ acquireHelpfulId = (e, user_id, review_id) => {
           component={Book}
         />
 
-      </main>
 
       </BookContext.Provider>
+
     </div>
   );
   }

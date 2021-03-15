@@ -141,11 +141,14 @@ class Review extends React.Component {
 
 
     render() {
-
+        let people = 'people';
+        if (this.state.helpfulCount == 1) {
+            people = 'person';
+        }
 
         let helpfulButton = this.state.alreadyHelp 
             ? <p></p>
-            : <button className={this.state.showHideHelpful} type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
+            : <button className="helpful" type="submit" onClick={(e) => this.helpCountIncrease(e)}>This review was helpful </button>
 
         let resultContents = (
             <div className="review">
@@ -153,7 +156,7 @@ class Review extends React.Component {
                 <div>
                     <div>
                         <p>{this.props.contents}</p>
-                        <p>{this.state.helpfulCount} people found this helpful</p>
+                        <p className="helpful">{this.state.helpfulCount} {people} found this helpful</p>
                         {/*<p>this.props.user: {this.props.user}</p>*/}
                         {helpfulButton}
                     </div>
@@ -169,9 +172,9 @@ class Review extends React.Component {
                     <div>
                         <div>
                             <p>{this.props.contents}</p>
-                            <p>{this.state.helpfulCount} people found this helpful</p>
-                            <button type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
-                            <button type="submit" onClick={(e) => this.context.deleteReview(e, this.props.reviewId, this.props.bookId)}>Delete</button>
+                            <p className="helpful">{this.state.helpfulCount} {people} found this helpful</p>
+                            <button  className="edit" type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
+                            <button  className="edit" type="submit" onClick={(e) => this.context.deleteReview(e, this.props.reviewId, this.props.bookId)}>Delete</button>
                         </div>
                     </div>
                 </div>
@@ -180,19 +183,20 @@ class Review extends React.Component {
 
         if (this.state.edit == true) {
             resultContents = (
-                <form onSubmit={(e) => this.editReviewHideInput(e/*, this.props.reviewId, this.state.title, this.state.content*/)}>
-                    <section className="form-section overview-section">
+                <form className="edit" onSubmit={(e) => this.editReviewHideInput(e/*, this.props.reviewId, this.state.title, this.state.content*/)}>
+                    <section>
                         <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
-                        <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
+                        <input className="edit" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
 
                         <label htmlFor="content">Review:</label>
-                        <textarea onChange={e => this.updateContent(e.target.value)} type="text" name="content" placeholder="Write your review here" defaultValue={this.state.contents} required >
+                        <textarea className="edit" onChange={e => this.updateContent(e.target.value)} type="text" name="content" placeholder="Write your review here" defaultValue={this.state.contents} required >
                         
                         </textarea>
-
-                        <button  type="submit">Submit</button>
-                        <button  type="button" onClick={() => this.editOff()}>Cancel</button>
+                        <div>
+                            <button  className="edit" type="submit">Submit</button>
+                            <button  className="edit" type="button" onClick={() => this.editOff()}>Cancel</button>
+                        </div>
                     </section>
                 </form>
             );

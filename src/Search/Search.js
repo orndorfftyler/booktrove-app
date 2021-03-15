@@ -15,9 +15,8 @@ class Search extends React.Component {
                 <Navbar 
                     historyProp={this.props.history}
                 />
-
-                <header>
-                    <h1>"quote about books" - famous author</h1>
+                <header className="search">
+                    <h1>"There is more treasure in books than in all the pirate's loot on Treasure Island." - Walt Disney</h1>
                     {/*<p>User:{this.context.currentUser}</p>*/}
                 </header>
 

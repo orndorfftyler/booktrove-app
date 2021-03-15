@@ -63,66 +63,83 @@ class Signup extends React.Component {
 
         let errorMessage = <p>{this.state.error}</p>;
 
+        let alreadySU = (
+                <h3>
+                    Already Signed up? &nbsp;   
+                    <Link to='/login'>
+                        Log in 
+                    </Link>
+                </h3>
+        );
+
+
         let nowLogin = <h3></h3>;
 
         if (this.state.signupSuccess) {
             nowLogin = (
-            <h3>
-                Signup Successful! Please 
-                <Link to='/login'>
-                    log in 
-                </Link>
-            </h3>
-            )
+                <div className="success">
+                    <h3>
+                        Signup Successful! Please &nbsp;
+                        <Link to='/login'>
+                            log in 
+                        </Link>
+                    </h3>
+                </div>
+
+            );
+            alreadySU = '';
         }
 
         let pwSection = (
             <>
                 <label htmlFor="pw1">Password</label>
-                <input type="password" name="pw1" id="pw1" required onChange={e => this.pw1Update(e.target.value)}/>
+                <input className="signup" type="password" name="pw1" id="pw1" required onChange={e => this.pw1Update(e.target.value)}/>
                 <label htmlFor="pw2">Confirm Password</label>
-                <input type="password" name="pw2" id="pw2" required onChange={e => this.pw2Update(e.target.value)}/>
+                <input className="signup" type="password" name="pw2" id="pw2" required onChange={e => this.pw2Update(e.target.value)}/>
             </>
         );
 
         let buttonSection = (
             <>
-                <button 
+                <button
+                    className="signup" 
                     type="submit" 
                     disabled={this.validatePw()}>
                     Sign Up
                 </button>
-                <SignupLoginErr 
-                    message={this.validatePw()}
-                />
             </>
         );
 
+
         return (
-                <div className="signup-page">
-                    <nav role="navigation"></nav>
+                <div className="signup-page look">
+                    <div className="top-bar"></div>
                     <main role="main">
                         <header>
                             <h1>Sign up for BookTrove!</h1>
                             
                         </header>
             
-                        <form onSubmit={(e) => this.handleSignup(e, this.state.username, this.state.pw1)}>
+                        <form className="signup" onSubmit={(e) => this.handleSignup(e, this.state.username, this.state.pw1)}>
                             <section className="overview-section">
                                 <label htmlFor="username">Username</label>
-                                <input type="text" name="username" placeholder="bookie411" required onChange={e => this.usernameUpdate(e.target.value)}/>
+                                <input className="signup" type="text" name="username"  required onChange={e => this.usernameUpdate(e.target.value)}/>
 
                                 {pwSection}
                             </section>
                             
                             <section className="login-signup-section">
-                            {nowLogin}
-                            <h3>
-                                Already Signed up? Log in   
-                                <Link to='/login'>
-                                    here 
-                                </Link>
-                            </h3>
+                                <div className="valerror">
+                                    <SignupLoginErr 
+                                        message={this.validatePw()}
+                                    />
+                                </div>
+                                {nowLogin}
+                                <div className="linkdiv">
+                                </div>
+                                <div >
+                                    {alreadySU}
+                                </div>
 
                             </section>  
 
@@ -135,6 +152,7 @@ class Signup extends React.Component {
 
                         </form>
                     </main>
+                    <footer></footer>
 
                 </div>
 

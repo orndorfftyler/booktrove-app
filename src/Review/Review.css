@@ -1,22 +1,107 @@
 .review {
-    /*border: 5px solid black;*/
+  width:300px;
+  background: #9FE6FD;
+  border-radius: 30px;
+  margin:auto;
+  margin: 10px 0;
 
-    width:300px;
-    background: tan;
-    border-radius: 30px;
-    margin:auto;
-    margin: 10px 0;
-
-
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+input.edit {
+  width: 200px;
+  margin-bottom: 10px;
+  height:40px;
+  font-size:24px;
+  font-family:'Fjalla One',sans-serif;
+  border-radius: 10px;
+}
+
+textarea.edit {
+  width: 200px;
+  margin-bottom: 10px;
+  font-size:14px;
+  font-family:'Fjalla One',sans-serif;
+  border-radius: 10px;;
+  height:200px;
+}
+
+form.edit {
+  width: 300px;
+  margin:auto;
+  background: #9FE6FD;
+  border-radius: 30px;
+
+}
+
+button.edit, button.helpful {
+  font-size: 24px;
+  font-family:'Fjalla One',sans-serif;
+  outline:none;
+  background:#FFF;
+
+  border-radius: 10px;
+  border:none;
+  width:105px;
+  height:40px;
+  margin:10px;
+  border-radius: 10px;
+}
+
+button.helpful {
+  width:150px;
+  height:80px;
+}
+
+p.reviewList {
+  font-size: 30px;
+  font-family:'Fjalla One',sans-serif;
+
+  text-align: center;
+  margin: auto;
+}
+
+p.helpful {
+  font-weight:bold;
+}
+
 
 @media all and (min-width: 1000px) {
     
-    .review {
+  .review {
       width:60%;
   }
+
+  input.edit {
+    width: 400px;
+    height:28px;
+  }
+
+  textarea.edit {
+    width: 400px;
+    font-size:20px;
+
+  }
+
+  form.edit {
+    width:60%;
+  }
+
+  button.edit {
+    font-size: 20px;
+
+    width:90px;
+    height:36px;
+  }
+
+  p.reviewList {
+    text-align: left;
+    margin: auto;
+    margin-left:30%;
+  }
+  
+
 }

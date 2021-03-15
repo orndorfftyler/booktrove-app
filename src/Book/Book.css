@@ -1,35 +1,113 @@
   
-  .hide {
-    display: none;
+.hide {
+  display: none;
+}
+
+.look {
+  font-family: "Open Sans",
+  sans-serif;
+  font-size: 20px;
+  color: #444;
+  text-align: center;
+  line-height: 1.5;
+  min-width: 320px;
+}
+/*
+p, h2 {
+  margin: 23px 0;
+}*/
+
+.book-page {
+  font-family: "Open Sans",
+  sans-serif;
+  font-size: 20px;
+  color: #444;
+  text-align: center;
+  line-height: 1.5;
+  min-width: 320px;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+input.book {
+  width: 200px;
+  margin-bottom: 10px;
+  height:40px;
+  font-size:24px;
+  font-family:'Fjalla One',sans-serif;
+  border-radius: 10px;
+}
+
+textarea.book {
+  width: 200px;
+  margin-bottom: 10px;
+  font-size:14px;
+  font-family:'Fjalla One',sans-serif;
+  border-radius: 10px;;
+  height:200px;
+}
+
+form.book {
+  width: 300px;
+  margin:auto;
+  background: #9FE6FD;
+  border-radius: 30px;
+
+}
+
+h3.prompt {
+  padding-top:20px;
+}
+
+button.book {
+  font-size: 24px;
+  font-family:'Fjalla One',sans-serif;
+  outline:none;
+  background:#FFF;
+
+  border-radius: 10px;
+  border:none;
+  width:105px;
+  height:40px;
+  margin: auto;
+  margin-top:20px;
+  margin-bottom:10px;
+
+  border-radius: 10px;
+}
+
+
+@media all and (min-width: 1000px) {
+
+  input.book {
+    width: 400px;
+    height:28px;
   }
-  
-  .look {
-    font-family: "Open Sans",
-    sans-serif;
+
+  textarea.book {
+    width: 400px;
+    font-size:20px;
+
+  }
+
+  form.book {
+    width:60%;
+  }
+
+  div.book {
+    width: 100%;
+  }
+
+  button.book {
     font-size: 20px;
-    color: #444;
-    text-align: center;
-    line-height: 1.5;
-    min-width: 320px;
-  }
-  
-  p, h2 {
-    margin: 23px 0;
-  }
-  
-  .book-page {
-    font-family: "Open Sans",
-    sans-serif;
-    font-size: 20px;
-    color: #444;
-    text-align: center;
-    line-height: 1.5;
-    min-width: 320px;
 
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    width:90px;
+    height:36px;
   }
 
+
+}

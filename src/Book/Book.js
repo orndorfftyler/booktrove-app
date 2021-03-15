@@ -49,18 +49,18 @@ class Book extends React.Component {
         let bookId = this.props.match.params.bookId;
         let current = this.context.results.find(book => book.identifier == bookId);
 
-        let reviewUserCheck = 'show';
+        let reviewUserCheck = 'book show';
         if (this.context.currentUser) {
             for (let i = 0; i < this.context.reviews.length; i++) {
                 if (this.context.reviews[i]['user'] == this.context.currentUser) {
-                    reviewUserCheck = 'hide';
+                    reviewUserCheck = 'book hide';
                 }
             }
     
         } else {
             for (let i = 0; i < this.context.reviews.length; i++) {
                 if (this.context.reviews[i]['user'] == localStorage.getItem('currentUser')) {
-                    reviewUserCheck = 'hide';
+                    reviewUserCheck = 'book hide';
                 }
             }
         }
@@ -73,34 +73,37 @@ class Book extends React.Component {
                     historyProp={this.props.history}
                 />
 
-                    <Result 
-                        title={current.title}
-                        src={current.src}
-                        author={current.author}
-                        description={current.description}
-                        details={current.details}
-                        id={current.identifier}
-                        linkify={false}
-                    />
+                <div className="spacer"></div>
 
-            <div className={reviewUserCheck}>
-                <div className={this.state.showHideReviewInput}>
-                    <form onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)}>
-                        <section className="form-section overview-section">
-                            <h3>Have you read this book? What did you think?</h3>
-                            <label htmlFor="title">Title</label>
-                            <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
+                <Result 
+                    title={current.title}
+                    src={current.src}
+                    author={current.author}
+                    description={current.description}
+                    details={current.details}
+                    id={current.identifier}
+                    linkify={false}
+                />
 
-                            <label htmlFor="content">Review:</label>
-                            <textarea type="text" name="content" placeholder="Write your review here" required onChange={e => this.updateContent(e.target.value)}>
-                            
-                            </textarea>
+                <div className={reviewUserCheck}>
+                    <div className={this.state.showHideReviewInput}>
+                        <form className="book" onSubmit={(e) => this.showHideReview(e, current.identifier, this.state.title, this.state.content)}>
+                            <section className="prompt">
+                                <h3 className="prompt">Have you read this book? What did you think?</h3>
+                                <label htmlFor="title">Title</label>
+                                <input  className="book" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
 
-                            <button  type="submit">Submit</button>
-                        </section>
-                    </form>
+                                <label htmlFor="content">Review:</label>
+                                <textarea  className="book" type="text" name="content" placeholder="Write your review here" required onChange={e => this.updateContent(e.target.value)}>
+                                
+                                </textarea>
+                                <div>
+                                    <button className="book" type="submit">Submit</button>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
                 </div>
-            </div>
                     {/*<section>
                         <h3>Review Name</h3>
                         <p>{JSON.stringify(this.context.reviews)}</p>
@@ -120,7 +123,7 @@ class Book extends React.Component {
                         <p>8 people found this helpful</p>
                     </section>*/}
                     
-
+                <div className="spacer"></div>
             </div>
         );
     }

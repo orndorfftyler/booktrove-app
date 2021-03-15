@@ -2,36 +2,66 @@
     box-sizing: border-box;
   }
   
-  .look {
-    font-family: "Open Sans",
-    sans-serif; 
+.look {
+  font-family: "Open Sans",
+  sans-serif; 
+  font-size: 20px;
+  color: #444;
+  text-align: center;
+  line-height: 1.5;
+}
+
+div.top-bar {
+  height: 50px;
+  background-color: #9FE6FD;
+}
+  
+header.landing-page {
+  background-color:#fff;
+  top:0;
+}
+
+div.landing-page, main.landing-page {
+  background-color: #9FE6FD;
+  width:100%;
+  height:100%;
+}
+
+section.landing-page {
+  padding: 40px 0;
+  background-color:#fff;
+}
+
+
+section:nth-child(odd).landing-page{
+  background-color: #9FE6FD;
+}
+
+button.landing {
+  font-size: 24px;
+  font-family:'Fjalla One',sans-serif;
+  outline:none;
+  /*background:#fec89a;*/
+  background: #9FE6FD;
+
+  border-radius: 10px;
+  border:none;
+  width:110px;
+  height:40px;
+  margin: auto;
+  margin-top:20px;
+  border-radius: 10px;
+}
+
+@media all and (min-width: 1000px) {
+
+  button.landing {
     font-size: 20px;
-    color: #444;
-    text-align: center;
-    line-height: 1.5;
+
+    width:110px;
+    height:36px;
   }
-  
-  nav,
-  footer {
-    padding: 1% 0;
-    background-color: #aaa;
-  }
-  
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
-  /*
-  section {
-    background-color: #ddd;
-  }
-*/
-  
-  header {
-    padding: 5% 0;
-  }
-  
+
+
+}
   
