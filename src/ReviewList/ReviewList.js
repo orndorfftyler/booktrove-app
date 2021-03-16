@@ -1,7 +1,6 @@
 import React from 'react';
 import Review from '../Review/Review';
 
-
 class ReviewList extends React.Component {
 
     render() {
