@@ -45,7 +45,7 @@ Frontend deployed using Vercel. Backend deployed using Heroku.
 
 Login page:
 
-<img src="./screenshots/booktrove-login.PNG" width="600">
+<img src="./screenshots/booktrove-login.PNG" width="500">
 
 Search page:
 
