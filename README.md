@@ -1,5 +1,5 @@
 # BookTrove 
-## (client)
+### (client)
 
 Try it out here: [https://booktrove-app.vercel.app](https://booktrove-app.vercel.app).
 
@@ -37,19 +37,19 @@ POST /api/users/
 
 ### Tech Used
 
-Built with HTML, CSS, JavaScript, React, React Router, Node.js, Express, Knex, PostgresSQL. 
+Built with HTML, CSS, JavaScript, React, React Router, Node.js, Express, Knex, PostgresSQL.  
 Frontend deployed using Vercel. Backend deployed using Heroku.
 
 ### Screenshots
 
 Login page:
 
-<img src="./screenshots/booktrove-login.PNG" width="200">
+<img src="./screenshots/booktrove-login.PNG" width="600">
 
 Search page:
 
-<img src="./screenshots/booktrove-search.PNG" width="200">
+<img src="./screenshots/booktrove-search.PNG" width="600">
 
 Book review page:
 
-<img src="./screenshots/booktrove-book.PNG" width="200">
+<img src="./screenshots/booktrove-book.PNG" width="600">
