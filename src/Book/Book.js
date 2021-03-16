@@ -38,12 +38,9 @@ class Book extends React.Component {
 
     showHideReview(e, bookId, title, content) {
         e.preventDefault();
-        //console.log('testFunc ran');
         this.updateShowHideReviewInput('hide');
         this.context.addReview(e, bookId, title, content);
-        
     }
-
 
     render() {
         let bookId = this.props.match.params.bookId;
@@ -64,7 +61,6 @@ class Book extends React.Component {
                 }
             }
         }
-
         
         return (
             <div className="book-page">
@@ -104,24 +100,12 @@ class Book extends React.Component {
                         </form>
                     </div>
                 </div>
-                    {/*<section>
-                        <h3>Review Name</h3>
-                        <p>{JSON.stringify(this.context.reviews)}</p>
-                        <p>current user: {this.context.currentUser}</p>
-                    </section>*/}
-                    
-                    {/* use this.context.reviews to generate review list*/}
 
                     <ReviewList 
                         reviews={this.context.reviews}
                         currentBook={current}
                         historyProp={this.props.history}
                     />
-                    {/*<section>
-                        <h3>Placeholder Review</h3>
-                        <p>This is where reviews will go</p>
-                        <p>8 people found this helpful</p>
-                    </section>*/}
                     
                 <div className="spacer"></div>
             </div>

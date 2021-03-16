@@ -1,12 +1,9 @@
 import React from 'react';
-import SignupLoginErr from '../ErrorComps/SignupLoginErr';
 import BookContext from '../BookContext';
-
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 import { Link } from 'react-router-dom';
 import Loading from './4V0b.gif';
-
 
 class LoginInput extends React.Component {
 
@@ -29,7 +26,6 @@ class LoginInput extends React.Component {
         this.setState({pw1:val});
     }
 
-
     handleSubmitJwtAuth = (e, user, pw) => {
         e.preventDefault()
         this.setState({
@@ -45,7 +41,6 @@ class LoginInput extends React.Component {
             this.setState({ username: '', pw1:'' })
 
             TokenService.saveAuthToken(res.authToken)
-            //this.props.onLoginSuccess()
             this.context.updateCurrentUser(user);
             this.props.historyProp.push('/search');
 
@@ -107,8 +102,6 @@ class LoginInput extends React.Component {
 
                                 <section className="button-section">
                                     {buttonSection}
-                                    {/*<p>{JSON.stringify(this.context.users)}</p>
-                                    <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
                                     
                                 </section>
                                 <div className={this.state.showLoading}>
@@ -123,4 +116,3 @@ class LoginInput extends React.Component {
 }
 
 export default LoginInput;
-

@@ -5,18 +5,14 @@ import Landing from './Landing/Landing';
 import Search from './Search/Search';
 import Signup from './Signup/Signup';
 import Login from './Login/Login';
-
 import BookContext from './BookContext';
 import { v4 as uuid } from 'uuid';
 import TokenService from './services/token-service';
-//import API_BASE_URL from './config';
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicOnlyRoute from './Utils/PublicOnlyRoute';
 import './App.css';
 
-
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
 
 class App extends Component {
   constructor(props) {
@@ -33,10 +29,7 @@ class App extends Component {
     }
   }
 
-
   updateTerm = (value) => {
-    //console.log('updateTerm');
-
     this.setState({term: value});
   }
 
@@ -45,7 +38,6 @@ class App extends Component {
       .map(key => `${key}=${params[key]}`)
     return queryItems.join('&');
   }
-
 
   populateReviews = (reviews) => {
     this.setState({
@@ -71,9 +63,7 @@ class App extends Component {
         
         )
       .catch(error => console.log({ error }))
-    
   }
-
 
   addReview = (e, bookId, title, desc) => {    
     e.preventDefault();
@@ -91,7 +81,6 @@ class App extends Component {
       helpCount: 0,
       user: cUser
     }
-
 
     fetch(`${API_BASE_URL}/reviewsperbook/${bookId}`, {
         method: 'POST',
@@ -114,7 +103,6 @@ class App extends Component {
         .catch(error => {
             console.error(error)
         })
-        
   }
 
   patchReview = (e, review) => {    
@@ -130,13 +118,11 @@ class App extends Component {
     })
         .then(data => {
           this.getReviews(review.bookId)
-            //this.props.history.push('/');
         }
         )
         .catch(error => {
             console.error(error)
         })
-        
   }
 
   deleteReview = (e, reviewId, bookId) => {
@@ -160,54 +146,40 @@ class App extends Component {
           console.error(error)
         })
   }
- updateCurrentUser = (username) => {
-  fetch(`${API_BASE_URL}/users/${username}`, {
-    headers: {
-      'authorization': `bearer ${TokenService.getAuthToken()}`,
-    },
-  })
-  .then(res => {
+  updateCurrentUser = (username) => {
+    fetch(`${API_BASE_URL}/users/${username}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res => {
+      
+      if (res.ok) {
+        return res.json()
+      }
+      throw new Error(res.status)
+      
+    })
+    .then(resJson => {
+      console.log(`username response: ${resJson.id}`);
+      this.setState({currentUser: resJson.id, currentUsername: username})
+      localStorage.setItem('currentUsername',username);
+      localStorage.setItem('currentUser', resJson.id);
+    })
+    .catch(error => console.log({ error, updateCurrentUser:'yes' }))
     
-    if (res.ok) {
-      return res.json()
-    }
-    throw new Error(res.status)
-    
-  })
-  .then(resJson => {
-    console.log(`username response: ${resJson.id}`);
-    this.setState({currentUser: resJson.id, currentUsername: username})
-    localStorage.setItem('currentUsername',username);
-    localStorage.setItem('currentUser', resJson.id);
-  })
-  .catch(error => console.log({ error, updateCurrentUser:'yes' }))
-  
-}
+  }
 
   searchHandler = e => {
     e.preventDefault();
     console.log('searchHandler');
     let termsArr = this.state.term.split(' ');
     termsArr = termsArr.join(',');
-    let /*params = {};
-
-    if (this.state.free !== 'remove') {
-      params = {
-        q: termsArr,
-        printType: this.state.print,
-        filter: this.state.free,
-        key: this.state.apiKey
-  
-      };
-  
-    } else {*/
-      params = {
+    let params = {
         q: termsArr,
         printType: 'all',
         key: this.state.apiKey
-  
       };
-    //}
 
     let prettyParams = this.paramFormat(params);
     const url = `${this.state.searchURL_TM}?${prettyParams}`;
@@ -224,13 +196,9 @@ class App extends Component {
     })
     .then(responseJson => this.updateResults(responseJson))
     .catch(error => {this.setState({results: ''})});
-
-
-    //update state - format as an array of objects
   }
 
   updateResults = (responseJson) => {
-    //let outArr = [];
     let out = responseJson.items.slice(0,10);
     let out2 = out.map(item => (
       {title:item.volumeInfo.title,
@@ -245,50 +213,6 @@ class App extends Component {
     this.setState({results: out2})
     console.log(this.state.results)
   }
-//------------------------------------------------------------ helpful count fetches
-/*
-updateHelpfulPerBook = (helpfuls) => {
-  this.setState({
-    helpfulPerBook: helpfuls 
-  })
-}
-*/
-
-/*
-acquireHelpfulId = (e, user_id, review_id) => {    
-  e.preventDefault();
-
-  let body = {
-    user_id: user_id
-  }
-
-  fetch(`${API_BASE_URL}/helpfulreview/${review_id}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-      body: JSON.stringify(body)
-  })
-      .then(res => {
-          if (res.ok) {
-          return res.json()
-          }
-          throw new Error(res.status)
-      })
-      .then(data => {
-        this.deleteHelpful(data.id, data.book_id);
-
-      })
-      .catch(error => {
-          console.error(error)
-      })
-      
-}
-*/
-
-
-
 
   render() {
     const contextValue = {
@@ -304,10 +228,6 @@ acquireHelpfulId = (e, user_id, review_id) => {
       getReviews: this.getReviews,
       patchReview: this.patchReview,
       deleteReview: this.deleteReview,
-      //getHelpfulPerBook: this.getHelpfulPerBook,
-      //postHelpful: this.postHelpful,
-      //acquireHelpfulId: this.acquireHelpfulId,
-      //deleteHelpful: this.deleteHelpful
     };
 
   return (
@@ -340,7 +260,6 @@ acquireHelpfulId = (e, user_id, review_id) => {
           path='/book/:bookId'
           component={Book}
         />
-
 
       </BookContext.Provider>
 

@@ -14,12 +14,6 @@ const BookContext = React.createContext({
   getReviews:() => {},
   patchReview: () => {},
   deleteReview: () => {},
-  //getHelpfulPerBook: () => {},
-  //postHelpful: () => {},
-  //acquireHelpfulId: () => {},
-  //deleteHelpful: () => {}
-
-
 })
 
 export default BookContext;

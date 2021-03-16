@@ -5,7 +5,6 @@ import BookContext from '../BookContext';
 import Navbar from '../Navbar/Navbar';
 import './Search.css';
 
-
 class Search extends React.Component {
     static contextType = BookContext;
 
@@ -17,7 +16,6 @@ class Search extends React.Component {
                 />
                 <header className="search">
                     <h1>"There is more treasure in books than in all the pirate's loot on Treasure Island." - Walt Disney</h1>
-                    {/*<p>User:{this.context.currentUser}</p>*/}
                 </header>
 
                 <SearchBar />

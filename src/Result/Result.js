@@ -15,8 +15,6 @@ class Result extends React.Component {
         }
     }
 
-
-
     showHideDesc() {
         if (this.state.desc && this.state.desc.split(' ').length <= 50) {
             this.setState({
@@ -29,11 +27,9 @@ class Result extends React.Component {
                 buttonLabel: 'More'
             })
         }
-
     }
 
     render() {
-
 
         let authorSection = this.props.author 
             ? <p>Author: {this.props.author.join(', ')}</p>
@@ -60,9 +56,7 @@ class Result extends React.Component {
                     </Link>
                     <div className="desc">
                         {authorSection}
-                        {/*<p>Publisher: {this.props.details}</p>*/}
                         <p>{descText}</p>
-                        {/*<p onClick={() => this.context.detailsHandler(this.props.title)}>Show/Hide Details (click me)</p> */}
                         {buttonVersion}
                     </div>
                 </div>
@@ -79,9 +73,7 @@ class Result extends React.Component {
                     </div>
                     <div className="desc">
                         {authorSection}
-                        {/*<p>Publisher: {this.props.details}</p>*/}
                         <p>{descText}</p>
-                        {/*<p onClick={() => this.context.detailsHandler(this.props.title)}>Show/Hide Details (click me)</p> */}
                         {buttonVersion}
                     </div>
                 </div>

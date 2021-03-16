@@ -2,9 +2,7 @@ import React from 'react';
 import SignupLoginErr from '../ErrorComps/SignupLoginErr';
 import BookContext from '../BookContext';
 import { Link } from 'react-router-dom';
-
 import AuthApiService from '../services/auth-api-service'
-
 import './Signup.css';
 
 class Signup extends React.Component {
@@ -41,7 +39,6 @@ class Signup extends React.Component {
 
     handleSignup = (e, user, pw) => {
         e.preventDefault()
-        //const { full_name, nick_name, user_name, password } = ev.target
     
         this.setState({ error: null })
         AuthApiService.postUser({
@@ -49,8 +46,6 @@ class Signup extends React.Component {
           password: pw
         })
           .then(user => {
-            //this.handleSubmitJwtAuth(e, user.user_name, pw);
-            //this.setState({ username: '', pw1:'' })
             this.setState({signupSuccess:true})
 
         })
@@ -71,7 +66,6 @@ class Signup extends React.Component {
                     </Link>
                 </h3>
         );
-
 
         let nowLogin = <h3></h3>;
 
@@ -110,14 +104,12 @@ class Signup extends React.Component {
             </>
         );
 
-
         return (
                 <div className="signup-page look">
                     <div className="top-bar"></div>
                     <main role="main">
                         <header>
                             <h1>Sign up for BookTrove!</h1>
-                            
                         </header>
             
                         <form className="signup" onSubmit={(e) => this.handleSignup(e, this.state.username, this.state.pw1)}>
@@ -145,16 +137,11 @@ class Signup extends React.Component {
 
                             <section className="button-section">
                                 {buttonSection}
-                                {/*<p>{JSON.stringify(this.context.users)}</p>
-                                <p>{`currentUser: ${this.context.currentUser}`}</p>*/}
                                 {errorMessage}
                             </section>
-
                         </form>
                     </main>
-
                 </div>
-
         );
     }
 }

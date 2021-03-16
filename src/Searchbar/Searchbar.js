@@ -1,7 +1,6 @@
 import React from 'react';
 import BookContext from '../BookContext';
 
-
 class Searchbar extends React.Component {
     static contextType = BookContext;
 
@@ -13,7 +12,7 @@ class Searchbar extends React.Component {
             <button className="search" onClick={this.context.searchHandler}>Submit</button>
         </form>
 
-    );
+        );
     }
 }
 

@@ -34,7 +34,6 @@ form.edit {
   margin:auto;
   background: #9FE6FD;
   border-radius: 30px;
-
 }
 
 button.edit, button.helpful {
@@ -67,7 +66,6 @@ p.reviewList {
 p.helpful {
   font-weight:bold;
 }
-
 
 @media all and (min-width: 1000px) {
     
@@ -102,6 +100,5 @@ p.helpful {
     margin: auto;
     margin-left:30%;
   }
-  
 
 }

@@ -30,15 +30,8 @@ export default class Nav extends React.Component {
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
     }
-    
 
     render() {
-/*
-        localStorage.getItem('currentUsername')
-        let displayUser = localStorage.getItem('currentUsername') 
-        ? localStorage.getItem('currentUsername') 
-        : 'none';
-*/
         let displayUser = this.context.currentUsername 
             || localStorage.getItem('currentUsername') 
             || 'none';

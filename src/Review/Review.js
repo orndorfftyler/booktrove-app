@@ -1,10 +1,8 @@
 import React from 'react';
 import BookContext from '../BookContext';
-import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
 import TokenService from '../services/token-service';
 import './Review.css';
-
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -29,12 +27,12 @@ class Review extends React.Component {
     editOn(e) {
         e.preventDefault();
         this.setState({edit:true});
-        
     }
 
     editOff() {
         this.setState({edit:false});
     }
+
     editReviewHideInput(e/*, reviewId, title, content*/) {
         e.preventDefault();
         this.setState({edit:false});
@@ -62,7 +60,6 @@ class Review extends React.Component {
         this.getHelpfulPerReview(this.props.reviewId);
     }
 
-
     helpCountIncrease = (e) => {
             
         e.preventDefault();
@@ -72,8 +69,6 @@ class Review extends React.Component {
             user_id: this.props.user,
             review_id: this.props.reviewId
         }
-        //console.log(`newHelp: ${JSON.stringify(newHelp)}`)
-        //console.log(`this.context.reviews: ${JSON.stringify(this.context.reviews)}`)
         
         fetch(`${API_BASE_URL}/helpfulreview/${this.props.reviewId}`, {
             method: 'POST',
@@ -91,7 +86,6 @@ class Review extends React.Component {
             })
             .then(data => {
                 this.getHelpfulPerReview(this.props.reviewId);
-                //this.setState({alreadyHelp: true});
         
             })
             .catch(error => {
@@ -104,12 +98,7 @@ class Review extends React.Component {
             if (this.props.user == this.state.helpfulData[i]['user_id']) {
                 this.setState({alreadyHelp: true});
             }
-            //console.log(`this.state.helpfulData[i]['user_id'] : ${this.state.helpfulData[i]['user_id']}`)
         }
-
-        //console.log(`this.props.user: ${this.props.user}`)
-        //console.log(`this.state.helpfulData: ${JSON.stringify(this.state.helpfulData)}`)
-        //console.log(`this.state.alreadyHelp: ${this.state.alreadyHelp}`)
     }
 
     getHelpfulPerReview = (reviewId) => {
@@ -133,12 +122,9 @@ class Review extends React.Component {
                 this.alreadyHelpCheck();
             }
             )
-             
             
             .catch(error => console.log({ error }))
             }
-
-
 
     render() {
         let people = 'people';
@@ -157,12 +143,10 @@ class Review extends React.Component {
                     <div>
                         <p>{this.props.contents}</p>
                         <p className="helpful">{this.state.helpfulCount} {people} found this helpful</p>
-                        {/*<p>this.props.user: {this.props.user}</p>*/}
                         {helpfulButton}
                     </div>
                 </div>
             </div>
-
         );
 
         if (this.context.currentUser == this.props.user || localStorage.getItem('currentUser') == this.props.user) {
@@ -179,11 +163,11 @@ class Review extends React.Component {
                     </div>
                 </div>
             );
-            }
+        }
 
         if (this.state.edit == true) {
             resultContents = (
-                <form className="edit" onSubmit={(e) => this.editReviewHideInput(e/*, this.props.reviewId, this.state.title, this.state.content*/)}>
+                <form className="edit" onSubmit={(e) => this.editReviewHideInput(e)}>
                     <section>
                         <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
@@ -201,13 +185,9 @@ class Review extends React.Component {
                 </form>
             );
         }
-        
 
         return (
             <>
-            {/*<p>{this.state.edit.toString()}</p>
-            <p>User:{this.context.currentUser}</p>
-            <p>Review author user:{this.props.user}</p>*/}
             {resultContents}
             </>
         )

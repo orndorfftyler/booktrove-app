@@ -4,7 +4,6 @@ import {BrowserRouter} from 'react-router-dom';
 import Book from './Book';
 import BookContext from '../BookContext';
 
-
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
@@ -33,19 +32,6 @@ it('renders without crashing', () => {
       helpCount:3,
       user:3}],
     currentUser: 3,
-    //currentUsername: this.state.currentUsername,
-    //helpfulPerBook: this.state.helpfulPerBook,
-    //updateTerm: this.updateTerm,
-    //searchHandler: this.searchHandler,
-    //addReview: this.addReview,
-    //updateCurrentUser: this.updateCurrentUser,
-    //getReviews: this.getReviews,
-    //patchReview: this.patchReview,
-    //deleteReview: this.deleteReview,
-    //getHelpfulPerBook: this.getHelpfulPerBook,
-    //postHelpful: this.postHelpful,
-    //acquireHelpfulId: this.acquireHelpfulId,
-    //deleteHelpful: this.deleteHelpful
   };
 
   ReactDOM.render(
