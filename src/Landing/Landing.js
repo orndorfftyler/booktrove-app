@@ -20,7 +20,7 @@ class Landing extends React.Component {
                         <p>username: admin</p>
                         <p>password: admin</p>
                         <p>Then search for a book using the search page. Click on a result to write and rate reviews!</p>
-
+                        <p>To interact with example reviews, search for "Dracula" and click on the first result.</p>
                         <Link to='/signup'><button className="landing" type="button">Let's Go!</button></Link>
                     </header>
 

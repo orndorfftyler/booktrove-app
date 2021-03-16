@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# BookTrove 
+## (client)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Try it out here: [https://booktrove-app.vercel.app](https://booktrove-app.vercel.app).
 
-## Available Scripts
+### Summary
 
-In the project directory, you can run:
+BookTrove allows you to read and write reviews of your favorite books. Users first sign up or log in before accessing the search page. The search page is powered by Google Books and allows you to search for books in which you are interested. Clicking on a book in the search results brings you to a page which lists the reviews left for that book by other BookTrove users. Users may indicate which reviews they found useful and leave their own review.
 
-### `npm start`
+### API Documentation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+BookTrove API endpoints:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+POST /api/auth/login
+- returns a JWT if user credentials are valid 
 
-### `npm test`
+GET /api/reviewsperbook/:book_id
+- gets the reviews for a given book
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+POST /api/reviewsperbook/:book_id
+- adds a review for a given book
 
-### `npm run build`
+DELETE /api/reviews/:review_id
+- deletes a review
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+PATCH /api/reviews/:review_id
+- updates an existing review
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+GET /api/helpfulreview/:review_id
+- gets a list of which users found a given review helpful
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+POST /api/helpfulreview/:review_id
+- adds to the list of which users found a given review helpful
 
-### `npm run eject`
+POST /api/users/
+- creates a new user/pw combo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Tech Used
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Built with HTML, CSS, JavaScript, React, React Router, Node.js, Express, Knex, PostgresSQL. 
+Frontend deployed using Vercel. Backend deployed using Heroku.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Screenshots
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Login page:
 
-## Learn More
+<img src="./screenshots/booktrove-login.PNG" width="200">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Search page:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="./screenshots/booktrove-search.PNG" width="200">
 
-### Code Splitting
+Book review page:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="./screenshots/booktrove-book.PNG" width="200">

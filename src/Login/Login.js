@@ -85,7 +85,7 @@ class LoginInput extends React.Component {
                         <form onSubmit={(e) => this.handleSubmitJwtAuth(e, this.state.username, this.state.pw1)}>
                             <section className="overview-section">
                                 <label htmlFor="username">Username</label>
-                                <input className="signup" type="text" name="username" placeholder="bookie411" required onChange={e => this.usernameUpdate(e.target.value)}/>
+                                <input className="signup" type="text" name="username" required onChange={e => this.usernameUpdate(e.target.value)}/>
 
                                 {pwSection}
                             </section>
