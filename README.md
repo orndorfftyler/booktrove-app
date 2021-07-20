@@ -6,7 +6,7 @@ BookTrove API repo: [https://github.com/orndorfftyler/booktrove-app-api](https:/
 
 ### Summary
 
-BookTrove allows you to read and write reviews of your favorite books. Users first sign up or log in before accessing the search page. The search page is powered by Google Books and allows you to search for books in which you are interested. Clicking on a book in the search results brings you to a page which lists the reviews left for that book by other BookTrove users. Users may indicate which reviews they found useful and leave their own review.
+BookTrove allows you to read and write reviews of your favorite books. Users first sign up or log in before accessing the search page. The search page is powered by Google Books and allows you to search for books that you are interested in. Clicking on a book in the search results brings you to a page which lists the reviews left for that book by other BookTrove users. Users may indicate which reviews they found useful and leave their own review.
 
 ### Tech Used
 
